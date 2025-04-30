@@ -1,1 +1,56 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Utility Classes */
+.main {
+  @apply min-h-screen bg-gray-100 text-gray-800;
+}
+
+.header {
+  @apply bg-teal-900 text-white text-center py-12 px-4;
+}
+
+.title {
+  @apply text-4xl font-bold mb-4;
+}
+
+.subtitle {
+  @apply text-lg mb-6;
+}
+
+.search-container {
+  @apply flex justify-center gap-2 flex-wrap;
+}
+
+.search-input {
+  @apply p-2 w-72 rounded text-black;
+}
+
+.primary-button {
+  @apply bg-teal-400 hover:bg-teal-500 text-white px-4 py-2 rounded;
+}
+
+.section {
+  @apply px-8 py-10;
+}
+
+.section-title {
+  @apply text-2xl font-semibold mb-4;
+}
+
+.course-list {
+  @apply space-y-4;
+}
+
+.course-card {
+  @apply bg-white p-4 border-l-4 border-teal-400 shadow;
+}
+
+.instruction-list {
+  @apply list-decimal list-inside space-y-2;
+}
+
+.footer {
+  @apply bg-gray-800 text-white text-center py-4;
+}
