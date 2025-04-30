@@ -19,7 +19,9 @@ export default function HomePage() {
       <section className="section">
         <h2 className="section-title">Top Reviewed Courses</h2>
         <div className="course-list">
-          <div className="course-card">CS180 - Introduction To Software Engineering</div>
+          <div className="course-card">
+            CS180 - Introduction To Software Engineering
+          </div>
           <div className="course-card">PHYS040C - General Physics</div>
         </div>
       </section>
