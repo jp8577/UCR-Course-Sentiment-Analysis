@@ -1,3 +1,13 @@
+import nltk
+print(nltk.__version__)
+from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
+
+# Download required datasets only if they aren't already present
+df_punkt = nltk.download('punkt', quiet=True)
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
+print(df_punkt)
+
 class Review:
     sentiment_score = 0
 
@@ -10,4 +20,6 @@ class Review:
         sentiment_score = self.__analyze_sentiment(text)
 
     def __analyze_sentiment(text):
-        pass
+        analyzer = SIA()
+        analyzer.polarity_scores(text)
+
