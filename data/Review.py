@@ -1,5 +1,4 @@
-import nltk
-print(nltk.__version__)
+import nltk  # version 3.9.1
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 
 nltk.download('vader_lexicon', quiet=True)
