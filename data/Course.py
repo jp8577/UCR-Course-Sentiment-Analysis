@@ -25,12 +25,10 @@ class Course:
         # TODO: summarize all of the comments
         pass
 
-    # Methods that need to be implemented for Database Class
+    # Methods that needed to be implemented for Database class
 
     def add_review(self, review):
         self.review_list.append(review)
-        # Recalculate the average sentiment when a new review is added
-        self.avg_sentiment = self.__calculate_avg_sentiment 
 
     def get_avg_sentiment(self):
         return self.avg_sentiment
