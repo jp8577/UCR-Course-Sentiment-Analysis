@@ -24,4 +24,16 @@ class User:
         else:
             print("User is not logged in.")
 
+    def get_user_id(self):
+        return self.__user_id
+    
+    def get_email(self):
+        return self.__email
+    
+    def get_name(self):
+        return self.__name
+    
+    def is_admin_user(self):
+        return self.__is_admin
+    
     
