@@ -1,4 +1,4 @@
-from Review import Review
+from data.Review import Review
 
 # to run, execute the following commands in your terminal
 # pip install transformers
@@ -45,7 +45,18 @@ class Course:
         summarizer = pipeline('summarization')
         summary = summarizer(combined_comments, max_length=130, min_length=25, do_sample=False)
         return summary[0]['summary_text']
+      
+    # Methods that needed to be implemented for Database class
+    def add_review(self, review):
+        self.review_list.append(review)
+
+    def get_avg_sentiment(self):
+        return self.avg_sentiment
     
+    def get_comment_summary(self, review_list):
+        return self.comment_summary
+      
+
 # temporary tests
 #TODO: make more official and clean tests
 # review_1 = Review(4, "Very general chemistry, just know your stuff", "3/29/2017 14:10:31")
@@ -54,7 +65,6 @@ class Course:
 # review_4 = Review(9, "Avoid Bartels at all costs. This man singlehandedly made my quarter hell. Midterms are all free response sketches and you only get 30 minutes to finish. The grading system was a mess. COVID really inspired this professor to make everything even more confusing than it should be. He basically hid our grades and made them impossible to calculate until after the P/NP deadline. He also made the final exam an oral interview. If you take this class with Bartels, also expect to go beyond Chem1A, because he starts teaching OChem stuff like Mass Spectrometry. He also gives out weekly discussion homework and homework every day (including holidays and weekends). Lecture clickers are graded on accuracy. Super difficult class for intro chem.", "12/11/2020 14:08:58")
 # review_list = [review_1, review_2, review_3, review_4]
 # course_1 = Course("CHEM001A", 5.66, review_list)
-
 # print("avg_difficulty:", course_1.avg_difficulty)
 # print("avg_sentiment", course_1.avg_sentiment)
 # print("comment summary:", course_1.comment_summary)
