@@ -1,4 +1,5 @@
 import Display from "@/components/display";
+import TopReviewed from "@/components/TopReviewed"
 
 export default function HomePage() {
   return (
@@ -20,12 +21,13 @@ export default function HomePage() {
 
       <section className="section">
         <h2 className="section-title">Top Reviewed Courses</h2>
-        <div className="course-list">
+        {/* <div className="course-list">
           <div className="course-card">
             CS180 - Introduction To Software Engineering
           </div>
           <div className="course-card">PHYS040C - General Physics</div>
-        </div>
+        </div> */}
+        <TopReviewed />
       </section>
 
       <section className="section pb-10">
