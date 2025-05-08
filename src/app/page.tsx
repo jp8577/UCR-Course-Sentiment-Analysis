@@ -1,8 +1,10 @@
+import Display from '@/components/display';
+
 export default function HomePage() {
   return (
     <main className="main">
       <header className="header">
-        <h1 className="title">TBD</h1>
+        <h1 className="title">UCR Course Reviews</h1>
         <p className="subtitle">
           Real reviews by UCR students. Find the best classes before you enroll.
         </p>
@@ -33,6 +35,11 @@ export default function HomePage() {
           <li>Read student reviews.</li>
           <li>Submit your own to help others!</li>
         </ol>
+      </section>
+
+      <section className="section">
+        <h2 className="section-title">All Courses</h2>
+        <Display />
       </section>
 
       <footer className="footer">
