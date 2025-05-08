@@ -1,6 +1,5 @@
 import Display from "@/components/display";
 import TopReviewed from "@/components/TopReviewed";
-
 export default function HomePage() {
   return (
     <main className="main">
@@ -31,6 +30,18 @@ export default function HomePage() {
           <li>Read student reviews.</li>
           <li>Submit your own to help others!</li>
         </ol>
+      </section>
+
+      {/* Add the button linking to the Google Form */}
+      <section className="section">
+        <h2 className="section-title">Submit Your Review</h2>
+        <a
+          href="https://docs.google.com/forms/d/1ieV9hByRgtBzp4mrEwRcNBNFnLC9f4XfZ6RPoa-NrD4/viewform?edit_requested=true"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="primary-button">Google form</button>
+        </a>
       </section>
 
       <section className="section">
