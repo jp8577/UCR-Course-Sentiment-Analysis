@@ -1,4 +1,4 @@
-from Review import Review
+from data.Review import Review
 
 class Course:
     def __init__(self, course_id, avg_difficulty, review_list):
