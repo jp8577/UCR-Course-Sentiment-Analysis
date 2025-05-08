@@ -54,7 +54,6 @@ export default function TopReviewed() {
 
   return (
     <div className="course-list">
-      <h3>The Top 10 Most Reviewed Courses</h3>
       {topCourses.length === 0 ? (
         <p>Loading top reviewed courses...</p>
       ) : (
