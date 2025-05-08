@@ -1,4 +1,4 @@
-import Display from '@/components/display';
+import Display from "@/components/display";
 
 export default function HomePage() {
   return (
