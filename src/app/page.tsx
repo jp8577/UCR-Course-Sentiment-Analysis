@@ -35,10 +35,12 @@ export default function HomePage() {
       {/* Add the button linking to the Google Form */}
       <section className="section">
         <h2 className="section-title">Submit Your Review</h2>
-        <a href="https://docs.google.com/forms/d/1ieV9hByRgtBzp4mrEwRcNBNFnLC9f4XfZ6RPoa-NrD4/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
-          <button className="primary-button">
-            Google form
-          </button>
+        <a
+          href="https://docs.google.com/forms/d/1ieV9hByRgtBzp4mrEwRcNBNFnLC9f4XfZ6RPoa-NrD4/viewform?edit_requested=true"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="primary-button">Google form</button>
         </a>
       </section>
 
@@ -46,8 +48,6 @@ export default function HomePage() {
         <h2 className="section-title">All Courses</h2>
         <Display />
       </section>
-
-      
 
       <footer className="footer">
         <p>&copy; TBD</p>
