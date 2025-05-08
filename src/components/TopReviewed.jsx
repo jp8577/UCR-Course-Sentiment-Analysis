@@ -62,7 +62,8 @@ export default function TopReviewed() {
           <div key={course} className="course-card">
             <strong>{course}</strong>
             <div className="text-sm text-gray-500">
-              {data.reviews.length} reviews • Avg Difficulty: {data.averageDifficulty}
+              {data.reviews.length} reviews • Avg Difficulty:{" "}
+              {data.averageDifficulty}
             </div>
           </div>
         ))

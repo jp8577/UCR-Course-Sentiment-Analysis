@@ -1,5 +1,5 @@
 import Display from "@/components/display";
-import TopReviewed from "@/components/TopReviewed"
+import TopReviewed from "@/components/TopReviewed";
 
 export default function HomePage() {
   return (
