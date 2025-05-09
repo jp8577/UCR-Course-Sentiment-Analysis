@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import Papa from "papaparse";
 
@@ -32,7 +31,7 @@ function groupReviews(rows) {
   return group;
 }
 
-export default function CourseReviews() {
+export default function CourseReviews({ query }) {
   const [groupedReviews, setGroupedReviews] = useState({});
 
   useEffect(() => {
@@ -48,7 +47,10 @@ export default function CourseReviews() {
 
   return (
     <div className="">
-      {Object.entries(groupedReviews).map(([course, data]) => {
+      {Object.entries(groupedReviews).filter(([course]) =>
+          course.toLowerCase().includes(query.toLowerCase()),
+        ) // only add if 'course' matches the query info sent by search bar
+        .map(([course, data]) => {
         const difficultyColor =
           data.averageDifficulty >= 9
             ? "text-red-500"
