@@ -1,9 +1,13 @@
-// app/courses/page.tsx
+"use client";
 
+import { useState } from "react";
+
+// app/courses/page.tsx
 import Display from "@/components/display";
 import Link from "next/link";
 
 export default function CoursesPage() {
+  const [query, setQuery] = useState("");
   return (
     <main className="main">
       <header className="header">
@@ -17,8 +21,20 @@ export default function CoursesPage() {
         </Link>
       </section>
 
+      {/* SEARCH BAR */}
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search by course code or name"
+            className="search-input"
+            onChange={(e) => setQuery(e.target.value)}
+          />
+
+          <button className="primary-button">Browse All Courses</button>
+        </div>
+      
       <section className="section">
-        <Display />
+        <Display query={query}/>
       </section>
 
       <footer className="footer">
