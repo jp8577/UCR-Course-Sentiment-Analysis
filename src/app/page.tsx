@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Display from "@/components/display";
+import TopReviewed from "@/components/TopReviewed";
+import Link from "next/link";
 
 export default function HomePage() {
   const [query, setQuery] = useState("");
@@ -29,12 +31,7 @@ export default function HomePage() {
 
       {/* <section className="section">
         <h2 className="section-title">Top Reviewed Courses</h2>
-        <div className="course-list">
-          <div className="course-card">
-            CS180 - Introduction To Software Engineering
-          </div>
-          <div className="course-card">PHYS040C - General Physics</div>
-        </div>
+        <TopReviewed />
       </section>
 
       <section className="section pb-10">
@@ -51,8 +48,20 @@ export default function HomePage() {
         <Display query={query} />
       </section>
 
+        <section className="section text-center">
+          <h2 className="section-title">Submit Your Review</h2>
+          <a
+            href="https://docs.google.com/forms/d/1ieV9hByRgtBzp4mrEwRcNBNFnLC9f4XfZ6RPoa-NrD4/viewform?edit_requested=true"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="primary-button">Google form</button>
+          </a>
+        </section>
+      </div>
+
       <footer className="footer">
-        <p>&copy; TBD</p>
+        <p></p>
       </footer>
     </main>
   );
