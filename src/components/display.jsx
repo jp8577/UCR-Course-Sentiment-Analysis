@@ -65,7 +65,9 @@ export default function CourseReviews() {
             <div className="px-10 py-3">
               <h2 className="mb-2 text-xl font-bold text-pink-400">{course}</h2>
               <strong>Average Difficulty:</strong>{" "}
-              <span className={difficultyColor}>{data.averageDifficulty}</span>
+              <span className={`font-bold ${difficultyColor}`}>
+                {data.averageDifficulty}
+              </span>
               <ul className="space-y-4">
                 {data.reviews.map((review, index) => (
                   <li key={index} className="border-b pb-2">
