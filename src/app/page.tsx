@@ -34,7 +34,6 @@ export default function HomePage() {
         </ol>
       </section>
 
-
       {/* Add the button linking to the Courses Page */}
       <section className="section">
         <h2 className="section-title">Explore All Courses</h2>
