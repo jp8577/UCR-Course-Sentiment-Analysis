@@ -48,39 +48,46 @@ export default function CourseReviews({ query }) {
   return (
     <div className="">
       {Object.entries(groupedReviews)
-        .filter(([course]) => course.toLowerCase().includes(query.toLowerCase())) // only add if 'course' matches the query info sent by search bar
-        .map(([course, data]) => ( // loop over each course (data has reviews array and average difficulty)
-          <div key={course} className="mb-3 rounded-xl bg-white p-6 shadow">
-            <div className="px-10 py-3">
-              <h2 className="mb-2 text-xl font-bold text-pink-400">{course}</h2>
-              <p className="mb-4 text-pink-300">
-                <strong>Average Difficulty:</strong> {data.averageDifficulty}
-              </p>
-              <ul className="space-y-4">
-                {data.reviews.map(
-                  (
-                    review,
-                    index, // loop through each review for the course
-                  ) => (
-                    <li key={index} className="border-b pb-2">
-                      <p>
-                        <strong>Difficulty:</strong> {review.Difficulty}
-                      </p>
-                      <p>
-                        <strong>Comments:</strong>{" "}
-                        {review["Additional Comments"]}
-                      </p>
-                      <p>
-                        <strong>Date:</strong> {review.Date}
-                      </p>
-                    </li>
-                  ),
-                )}
-              </ul>
+        .filter(([course]) =>
+          course.toLowerCase().includes(query.toLowerCase()),
+        ) // only add if 'course' matches the query info sent by search bar
+        .map(
+          (
+            [course, data], // loop over each course (data has reviews array and average difficulty)
+          ) => (
+            <div key={course} className="mb-3 rounded-xl bg-white p-6 shadow">
+              <div className="px-10 py-3">
+                <h2 className="mb-2 text-xl font-bold text-pink-400">
+                  {course}
+                </h2>
+                <p className="mb-4 text-pink-300">
+                  <strong>Average Difficulty:</strong> {data.averageDifficulty}
+                </p>
+                <ul className="space-y-4">
+                  {data.reviews.map(
+                    (
+                      review,
+                      index, // loop through each review for the course
+                    ) => (
+                      <li key={index} className="border-b pb-2">
+                        <p>
+                          <strong>Difficulty:</strong> {review.Difficulty}
+                        </p>
+                        <p>
+                          <strong>Comments:</strong>{" "}
+                          {review["Additional Comments"]}
+                        </p>
+                        <p>
+                          <strong>Date:</strong> {review.Date}
+                        </p>
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </div>
             </div>
-          </div>
-        ),
-      )}
+          ),
+        )}
     </div>
   );
 }

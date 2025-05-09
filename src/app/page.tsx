@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from 'react';
+import { useState } from "react";
 import Display from "@/components/display";
 
 export default function HomePage() {
@@ -14,16 +14,14 @@ export default function HomePage() {
           Real reviews by UCR students. Find the best classes before you enroll.
         </p>
 
-
         {/* SEARCH BAR */}
         <div className="search-container">
           <input
             type="text"
             placeholder="Search by course code or name"
             className="search-input"
-            onChange={e => setQuery(e.target.value)}
+            onChange={(e) => setQuery(e.target.value)}
           />
-
 
           <button className="primary-button">Browse All Courses</button>
         </div>
