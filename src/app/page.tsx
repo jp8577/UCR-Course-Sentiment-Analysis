@@ -1,4 +1,3 @@
-import Display from "@/components/display";
 import TopReviewed from "@/components/TopReviewed";
 import Link from "next/link";
 
@@ -25,42 +24,37 @@ export default function HomePage() {
         <TopReviewed />
       </section>
 
-      <section className="section pb-10">
-        <h2 className="section-title">How It Works</h2>
-        <ol className="instruction-list">
-          <li>Search for a course.</li>
-          <li>Read student reviews.</li>
-          <li>Submit your own to help others!</li>
-        </ol>
-      </section>
+      <div className="mx-auto flex flex-row justify-between px-24">
+        <section className="section pb-10">
+          <h2 className="section-title">How It Works</h2>
+          <ol className="instruction-list">
+            <li>Search for a course.</li>
+            <li>Read student reviews.</li>
+            <li>Submit your own to help others!</li>
+          </ol>
+        </section>
 
-      {/* Add the button linking to the Courses Page */}
-      <section className="section">
-        <h2 className="section-title">Explore All Courses</h2>
-        <Link href="/courses">
-          <button className="primary-button">Go to Courses</button>
-        </Link>
-      </section>
+        <section className="section text-center">
+          <h2 className="section-title">Explore All Courses</h2>
+          <Link href="/courses">
+            <button className="primary-button">Go to Courses</button>
+          </Link>
+        </section>
 
-      {/* Add the button linking to the Google Form */}
-      <section className="section">
-        <h2 className="section-title">Submit Your Review</h2>
-        <a
-          href="https://docs.google.com/forms/d/1ieV9hByRgtBzp4mrEwRcNBNFnLC9f4XfZ6RPoa-NrD4/viewform?edit_requested=true"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <button className="primary-button">Google form</button>
-        </a>
-      </section>
-
-      <section className="section">
-        <h2 className="section-title">All Courses</h2>
-        <Display />
-      </section>
+        <section className="section text-center">
+          <h2 className="section-title">Submit Your Review</h2>
+          <a
+            href="https://docs.google.com/forms/d/1ieV9hByRgtBzp4mrEwRcNBNFnLC9f4XfZ6RPoa-NrD4/viewform?edit_requested=true"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="primary-button">Google form</button>
+          </a>
+        </section>
+      </div>
 
       <footer className="footer">
-        <p>&copy; TBD</p>
+        <p></p>
       </footer>
     </main>
   );

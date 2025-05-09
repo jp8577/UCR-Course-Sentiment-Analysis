@@ -13,7 +13,7 @@ export default function CoursesPage() {
       {/* Button to link back to the homepage */}
       <section className="section">
         <Link href="/">
-          <button className="primary-button">Go Back to Homepage</button>
+          <button className="primary-button">Home</button>
         </Link>
       </section>
 
