@@ -36,7 +36,7 @@ export default function HomePage() {
 
         <section className="section text-center">
           <h2 className="section-title">Explore All Courses</h2>
-          <Link href="/courses">
+          <Link href="/Courses">
             <button className="primary-button">Go to Courses</button>
           </Link>
         </section>
