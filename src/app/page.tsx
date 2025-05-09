@@ -1,5 +1,7 @@
 import Display from "@/components/display";
 import TopReviewed from "@/components/TopReviewed";
+import Link from "next/link";
+
 export default function HomePage() {
   return (
     <main className="main">
@@ -30,6 +32,14 @@ export default function HomePage() {
           <li>Read student reviews.</li>
           <li>Submit your own to help others!</li>
         </ol>
+      </section>
+
+      {/* Add the button linking to the Courses Page */}
+      <section className="section">
+        <h2 className="section-title">Explore All Courses</h2>
+        <Link href="/courses">
+          <button className="primary-button">Go to Courses</button>
+        </Link>
       </section>
 
       {/* Add the button linking to the Google Form */}
