@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import Papa from "papaparse";
 
@@ -32,7 +31,7 @@ function groupReviews(rows) {
   return group;
 }
 
-export default function CourseReviews() {
+export default function CourseReviews({ query }) {
   const [groupedReviews, setGroupedReviews] = useState({});
 
   useEffect(() => {
@@ -48,10 +47,9 @@ export default function CourseReviews() {
 
   return (
     <div className="">
-      {Object.entries(groupedReviews).map(
-        (
-          [course, data], // loop over each course (data has reviews array and average difficulty)
-        ) => (
+      {Object.entries(groupedReviews)
+        .filter(([course]) => course.toLowerCase().includes(query.toLowerCase())) // only add if 'course' matches the query info sent by search bar
+        .map(([course, data]) => ( // loop over each course (data has reviews array and average difficulty)
           <div key={course} className="mb-3 rounded-xl bg-white p-6 shadow">
             <div className="px-10 py-3">
               <h2 className="mb-2 text-xl font-bold text-pink-400">{course}</h2>

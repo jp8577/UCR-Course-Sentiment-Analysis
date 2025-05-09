@@ -1,6 +1,11 @@
+"use client";
+
+import {useState} from 'react';
 import Display from "@/components/display";
 
 export default function HomePage() {
+  const [query, setQuery] = useState("");
+
   return (
     <main className="main">
       <header className="header">
@@ -8,17 +13,23 @@ export default function HomePage() {
         <p className="subtitle">
           Real reviews by UCR students. Find the best classes before you enroll.
         </p>
+
+
+        {/* SEARCH BAR */}
         <div className="search-container">
           <input
             type="text"
-            placeholder="Search by course code or name..."
+            placeholder="Search by course code or name"
             className="search-input"
+            onChange={e => setQuery(e.target.value)}
           />
+
+
           <button className="primary-button">Browse All Courses</button>
         </div>
       </header>
 
-      <section className="section">
+      {/* <section className="section">
         <h2 className="section-title">Top Reviewed Courses</h2>
         <div className="course-list">
           <div className="course-card">
@@ -35,11 +46,11 @@ export default function HomePage() {
           <li>Read student reviews.</li>
           <li>Submit your own to help others!</li>
         </ol>
-      </section>
+      </section> */}
 
       <section className="section">
         <h2 className="section-title">All Courses</h2>
-        <Display />
+        <Display query={query} />
       </section>
 
       <footer className="footer">
