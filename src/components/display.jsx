@@ -32,7 +32,7 @@ function groupReviews(rows) {
   return group;
 }
 
-export default function CourseReviews() {
+export default function CourseReviews({ query }) {
   const [groupedReviews, setGroupedReviews] = useState({});
 
   useEffect(() => {

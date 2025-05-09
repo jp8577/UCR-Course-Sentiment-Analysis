@@ -12,16 +12,6 @@ export default function CoursesPage() {
     <main className="main">
       <header className="header">
         <h1 className="title">All Courses</h1>
-      </header>
-
-      {/* Button to link back to the homepage */}
-      <section className="section">
-        <Link href="/">
-          <button className="primary-button">Home</button>
-        </Link>
-      </section>
-
-      {/* SEARCH BAR */}
         <div className="search-container">
           <input
             type="text"
@@ -32,6 +22,14 @@ export default function CoursesPage() {
 
           <button className="primary-button">Browse All Courses</button>
         </div>
+      </header>
+
+      {/* Button to link back to the homepage */}
+      <section className="section">
+        <Link href="/">
+          <button className="primary-button">Home</button>
+        </Link>
+      </section>
       
       <section className="section">
         <Display query={query}/>
