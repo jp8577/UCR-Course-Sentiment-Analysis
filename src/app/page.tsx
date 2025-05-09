@@ -34,6 +34,27 @@ export default function HomePage() {
           </ol>
         </section>
 
+        <section className="section pb-10 text-center">
+          <h2 className="section-title">Useful Links</h2>
+          <a
+            href="https://rweb.ucr.edu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            RWEB
+          </a>
+          <br />
+          <a
+            href="https://student.engr.ucr.edu/majors"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            BCOE Courses Plan
+          </a>
+        </section>
+
         <section className="section text-center">
           <h2 className="section-title">Explore All Courses</h2>
           <Link href="/courses">
