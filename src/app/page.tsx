@@ -41,6 +41,7 @@ export default function HomePage() {
         <Link href="/courses">
           <button className="primary-button">Go to Courses</button>
         </Link>
+      </section>
 
       {/* Add the button linking to the Google Form */}
       <section className="section">
