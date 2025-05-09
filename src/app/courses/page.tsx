@@ -1,30 +1,29 @@
 // app/courses/page.tsx
 
-import Display from "@/components/display"
+import Display from "@/components/display";
 import Link from "next/link";
 
 export default function CoursesPage() {
-    return (
-      <main className="main">
-        <header className="header">
-          <h1 className="title">All Courses</h1>
-        </header>
-        
-        {/* Button to link back to the homepage */}
-        <section className="section">
-            <Link href="/">
-            <button className="primary-button">Go Back to Homepage</button>
-            </Link>
-        </section>
+  return (
+    <main className="main">
+      <header className="header">
+        <h1 className="title">All Courses</h1>
+      </header>
 
-        <section className="section">
-            <Display />
-        </section>
-  
-        <footer className="footer">
-          <p>&copy; TBD</p>
-        </footer>
-      </main>
-    );
-  }
-  
+      {/* Button to link back to the homepage */}
+      <section className="section">
+        <Link href="/">
+          <button className="primary-button">Go Back to Homepage</button>
+        </Link>
+      </section>
+
+      <section className="section">
+        <Display />
+      </section>
+
+      <footer className="footer">
+        <p>&copy; TBD</p>
+      </footer>
+    </main>
+  );
+}
