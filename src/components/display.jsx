@@ -51,22 +51,21 @@ export default function CourseReviews() {
       {Object.entries(groupedReviews).map(([course, data]) => {
         const difficultyColor =
           data.averageDifficulty >= 9
-            ? "text-red-800"
+            ? "text-red-500"
             : data.averageDifficulty >= 7
-              ? "text-red-500"
+              ? "text-red-300"
               : data.averageDifficulty >= 5
-                ? "text-yellow-500"
+                ? "text-yellow-400"
                 : data.averageDifficulty >= 3
                   ? "text-green-300"
-                  : "text-green-800";
+                  : "text-green-600";
 
         return (
           <div key={course} className="mb-3 rounded-xl bg-white p-6 shadow">
             <div className="px-10 py-3">
               <h2 className="mb-2 text-xl font-bold text-pink-400">{course}</h2>
-              <p className={`mb-4 font-semibold ${difficultyColor}`}>
-                <strong>Average Difficulty:</strong> {data.averageDifficulty}
-              </p>
+              <strong>Average Difficulty:</strong>{" "}
+              <span className={difficultyColor}>{data.averageDifficulty}</span>
               <ul className="space-y-4">
                 {data.reviews.map((review, index) => (
                   <li key={index} className="border-b pb-2">
