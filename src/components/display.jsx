@@ -48,7 +48,10 @@ export default function CourseReviews() {
 
   return (
     <div className="">
-      {Object.entries(groupedReviews).map(([course, data]) => {
+      {Object.entries(groupedReviews).filter(([course]) =>
+          course.toLowerCase().includes(query.toLowerCase()),
+        ) // only add if 'course' matches the query info sent by search bar
+        .map(([course, data]) => {
         const difficultyColor =
           data.averageDifficulty >= 9
             ? "text-red-500"
