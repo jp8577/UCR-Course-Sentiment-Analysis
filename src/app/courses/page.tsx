@@ -30,9 +30,9 @@ export default function CoursesPage() {
           <button className="primary-button">Home</button>
         </Link>
       </section>
-      
+
       <section className="section">
-        <Display query={query}/>
+        <Display query={query} />
       </section>
 
       <footer className="footer">
