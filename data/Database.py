@@ -94,3 +94,9 @@ class Database:
             return True
         return False
     
+    def get_course_by_id(self, course_id: str):
+        for course in self.courses:
+            if course.course_id == course_id:
+                return course
+        return None  # If no course is found
+    
