@@ -13,8 +13,9 @@ async function getCourseData(courseId) {
   return courses.find((c) => c.course_id === courseId);
 }
 
-export default async function CoursePage({ params }) {
-  const course = await getCourseData(params.courseId);
+export default async function CoursePage(props) {
+  const { courseId } = await props.params;
+  const course = await getCourseData(courseId);
 
   if (!course) {
     return <div className="text-center text-red-500 mt-10">Course not found.</div>;
