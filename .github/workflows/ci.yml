@@ -28,4 +28,4 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m unittest discover tests/  # This will discover and run tests in the 'tests' folder
+          python -m unittest discover tests  # This will discover and run tests in the 'tests' folder

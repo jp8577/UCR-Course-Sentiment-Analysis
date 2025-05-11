@@ -8,7 +8,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from data.Database import Database
 
-# to run: uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
+# to run: uvicorn api.app:app --reload
 
 
 # FastAPI app instance
@@ -26,6 +26,7 @@ app.add_middleware(
 # Initialize database
 db = Database()
 db.load_courses_from_csv('public/UCR class difficulty database - Sheet1.csv')
+print(f"Loaded {len(db.courses)} courses.")
 
 # Pydantic models
 class Review(BaseModel):
