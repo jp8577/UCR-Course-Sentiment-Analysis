@@ -1,4 +1,4 @@
-from data.Review import Review
+from Review import Review
 
 # to run, execute the following commands in your terminal
 # pip install transformers
@@ -28,13 +28,16 @@ class Course:
                 break
         return letters
 
-    def __calculate_avg_sentiment(self, review_list):
-        counter = 0
+    def __calculate_avg_sentiment(self, reviews):
+        if not reviews:
+            return 0.0
         sum = 0
-        for review in review_list:
+        counter = 0
+        for review in reviews:
+            sum += review.rating
             counter += 1
-            sum += review.sentiment_score
         return (sum / counter)
+
 
     def __summarize_comments(self, review_list):
         if (len(review_list) == 0): return ""
@@ -53,7 +56,7 @@ class Course:
     def get_avg_sentiment(self):
         return self.avg_sentiment
     
-    def get_comment_summary(self, review_list):
+    def get_comment_summary(self):
         return self.comment_summary
       
 

@@ -1,4 +1,5 @@
-from data.Course import Course
+from Course import Course
+from Review import Review
 import csv
 from datetime import datetime
 
@@ -10,13 +11,29 @@ class Database:
         try:
             with open(filepath, mode='r', newline='', encoding='utf-8') as file:
                 reader = csv.DictReader(file)
-                for row in reader:
-                    course_id = row['Class']
-                    avg_difficulty = float(row.get('avg_difficulty', 0.0))
-                    review_list = []  # You can populate this later if needed
+                current_course = None
 
-                    course = Course(course_id, avg_difficulty, review_list)
-                    self.courses[course_id] = course
+                for row in reader:
+                    course_id = row['Class'].strip()
+
+                    # If there's a new course, create it and store in dict
+                    if course_id:
+                        avg_difficulty = float(row.get('avg_difficulty', 0.0))
+                        current_course = Course(course_id, avg_difficulty, [])
+                        self.courses[course_id] = current_course
+
+                    # If no course has been initialized yet (i.e. first row was invalid)
+                    if current_course is None:
+                        continue
+
+                    # Process additional comments if present
+                    comment_text = row.get('Additional Comments', '').strip()
+                    if comment_text:
+                        rating = 0  # default or replace with a value from CSV if available
+                        date_posted = datetime.now().strftime('%Y-%m-%d')  # or replace with date from CSV
+                        review = Review(rating, comment_text, date_posted)
+                        current_course.add_review(review)
+
         except FileNotFoundError:
             print(f"File not found: {filepath}")
         except KeyError as e:
@@ -24,7 +41,6 @@ class Database:
         except Exception as e:
             print(f"Error loading courses: {e}")
 
-        
 
     def export_summary_csv(self, output_path="course_sentiment_summary.csv"):
         # Export the summary data to a CSV file
@@ -37,3 +53,25 @@ class Database:
                 avg_score = course.get_avg_sentiment()  # Get average sentiment score for the course
                 comment_summary = course.get_comment_summary()  # You might want to replace this with the actual label method
                 writer.writerow([course_name, round(avg_score, 3), comment_summary])  # Write course data to CSV
+
+
+    def get_course(self, course_id):
+        return self.courses.get(course_id)
+    
+    def get_all_courses(self):
+        return list(self.courses.values())
+    
+    def search_courses(self, query):
+        return [course for course in self.courses.values() if query.lower() in course.course_id.lower()]
+
+    def add_course(self, course_id, avg_difficulty=1.0):
+        if course_id not in self.courses:
+            self.courses[course_id] = Course(course_id, avg_difficulty, [])
+
+    def add_review_to_course(self, course_id, review):
+        course = self.get_course(course_id)
+        if course:
+            course.add_review(review)
+            return True
+        return False
+    
