@@ -1,7 +1,8 @@
-from Database import Database
-from Review import Review
+from data.Database import Database
+from data.Review import Review
 from datetime import datetime
 
+# to run: python -m data.test_Database
 def test_database():
     # Create a new Database instance
     db = Database()

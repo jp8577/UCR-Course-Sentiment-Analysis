@@ -1,4 +1,4 @@
-from Review import Review
+from data.Review import Review
 
 # to run, execute the following commands in your terminal
 # pip install transformers
@@ -52,12 +52,21 @@ class Course:
     # Methods that needed to be implemented for Database class
     def add_review(self, review):
         self.review_list.append(review)
+        #self.update_avg_difficulty()
+        
 
     def get_avg_sentiment(self):
         return self.avg_sentiment
     
     def get_comment_summary(self):
         return self.comment_summary
+    
+    def update_avg_difficulty(self):
+        if self.review_list:
+            total_difficulty = sum([review.rating for review in self.review_list])
+            self.avg_difficulty = total_difficulty / len(self.review_list)
+        else:
+            self.avg_difficulty = 0.0 
       
 
 # temporary tests

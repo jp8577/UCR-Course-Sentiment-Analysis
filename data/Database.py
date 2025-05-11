@@ -1,5 +1,5 @@
-from Course import Course
-from Review import Review
+from data.Course import Course
+from data.Review import Review
 import csv
 from datetime import datetime
 
@@ -18,7 +18,7 @@ class Database:
 
                     # If there's a new course, create it and store in dict
                     if course_id:
-                        avg_difficulty = float(row.get('avg_difficulty', 0.0))
+                        avg_difficulty = float(row.get('Average Difficulty'))
                         current_course = Course(course_id, avg_difficulty, [])
                         self.courses[course_id] = current_course
 
@@ -29,8 +29,9 @@ class Database:
                     # Process additional comments if present
                     comment_text = row.get('Additional Comments', '').strip()
                     if comment_text:
-                        rating = 0  # default or replace with a value from CSV if available
-                        date_posted = datetime.now().strftime('%Y-%m-%d')  # or replace with date from CSV
+                        rating = float(row.get('Difficulty'))
+                        date_posted = row.get('Date')
+                        
                         review = Review(rating, comment_text, date_posted)
                         current_course.add_review(review)
 
