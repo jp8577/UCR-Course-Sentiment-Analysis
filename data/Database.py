@@ -86,11 +86,14 @@ class Database:
     def add_course(self, course_id, avg_difficulty=1.0):
         if course_id not in self.courses:
             self.courses[course_id] = Course(course_id, avg_difficulty, [])
+            self.save_courses_to_csv()  # Save after adding course
+
 
     def add_review_to_course(self, course_id, review):
         course = self.get_course(course_id)
         if course:
             course.add_review(review)
+            self.save_courses_to_csv()  # Save after adding course
             return True
         return False
     
@@ -100,3 +103,30 @@ class Database:
                 return course
         return None  # If no course is found
     
+    import csv
+
+    def save_courses_to_csv(self, output_path="saved_courses.csv"):
+        # Open a file for writing
+        with open(output_path, mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            
+            # Write the header row
+            writer.writerow(['Class', 'Average Difficulty', 'Additional Comments', 'Difficulty', 'Date'])
+
+            # Keep track of which courses have already had their course_id written
+            written_courses = set()
+
+            # Iterate through courses and their reviews
+            for course in self.courses.values():
+                for i, review in enumerate(course.review_list):
+                    # Check if this course has been written before
+                    if course.course_id not in written_courses:
+                        # For the first review of each course, include the course_id in the 'Class' column
+                        writer.writerow([course.course_id, course.avg_difficulty, review.text, review.rating, review.date_posted])
+                        # Mark this course as written
+                        written_courses.add(course.course_id)
+                    else:
+                        # For subsequent reviews, leave the 'Class' column empty
+                        writer.writerow(["", course.avg_difficulty, review.text, review.rating, review.date_posted])
+
+        print(f"Courses saved successfully to {output_path}.")
