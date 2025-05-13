@@ -10,7 +10,6 @@
     "check": "npx prettier --check .",
     "eslint": "npx eslint -c eslint.config.mjs",
     "prepare": "husky"
-    
   },
   "dependencies": {
     "@tanstack/react-query": "5.69.0",
@@ -47,5 +46,4 @@
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3"
   }
-
 }
