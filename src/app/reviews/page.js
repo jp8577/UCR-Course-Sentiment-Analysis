@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Toaster } from 'react-hot-toast';
 
 export default function ReviewForm() {
   const [courseCode, setCourseCode] = useState("");
@@ -28,17 +29,17 @@ export default function ReviewForm() {
       });
 
       if (res.ok) {
-        alert("Review submitted successfully!");
+        Toaster.success("Review submitted successfully!");
         // Reset the form
         setCourseCode("");
         setReviewText("");
         setDifficulty(1);
       } else {
-        alert("Failed to submit the review. Please try again.");
+        Toaster.error("Failed to submit the review. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting review:", error);
-      alert("Error submitting review. Please try again.");
+      Toaster.error("Error submitting review. Please try again.");
     }
   };
 
