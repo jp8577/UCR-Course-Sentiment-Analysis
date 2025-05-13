@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 
 export default function ReviewForm() {
   const [courseCode, setCourseCode] = useState("");
