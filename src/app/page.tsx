@@ -1,7 +1,7 @@
-import TopReviewed from "@/components/TopReviewed";
 import Link from "next/link";
+import TopReviewed from "@/components/TopReviewed";
 
-export default function HomePage() {
+const HomePage = () => {
   return (
     <main className="main">
       <header className="header">
@@ -9,14 +9,6 @@ export default function HomePage() {
         <p className="subtitle">
           Real reviews by UCR students. Find the best classes before you enroll.
         </p>
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search by course code or name..."
-            className="search-input"
-          />
-          <button className="primary-button">Browse All Courses</button>
-        </div>
       </header>
 
       <section className="section">
@@ -41,15 +33,13 @@ export default function HomePage() {
           </Link>
         </section>
 
+        {/* Updated section with a link to the reviews page */}
         <section className="section text-center">
           <h2 className="section-title">Submit Your Review</h2>
-          <a
-            href="https://docs.google.com/forms/d/1ieV9hByRgtBzp4mrEwRcNBNFnLC9f4XfZ6RPoa-NrD4/viewform?edit_requested=true"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button className="primary-button">Google form</button>
-          </a>
+          {/* Button linking to the review submission page */}
+          <Link href="/reviews">
+            <button className="primary-button">Submit a Review</button>
+          </Link>
         </section>
       </div>
 
@@ -58,4 +48,6 @@ export default function HomePage() {
       </footer>
     </main>
   );
-}
+};
+
+export default HomePage;

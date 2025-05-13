@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export async function generateStaticParams() {
   const res = await fetch('http://localhost:8000/api/courses');
   const courses = await res.json();
@@ -23,10 +25,25 @@ export default async function CoursePage(props) {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-4">{course.course_id}</h1>
-      <p className="text-lg mb-8 text-gray-700">
-        <strong>Average Difficulty:</strong> {course.avg_difficulty}
-      </p>
+      
+      <header className="header">
+        <h1 className="title">{course.course_id}</h1>
+        <p className="subtitle">
+          <strong>Average Difficulty:</strong> {course.avg_difficulty}
+        </p>
+      </header>
+      
+      <section className="section text-center">
+        <Link href="/">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mt-4">
+            Return to Home
+          </button>
+        </Link>
+      
+        <Link href="/courses">
+          <button className="primary-button ml-4">Go to Courses</button>
+        </Link>
+      </section>  
 
       <h2 className="text-2xl font-semibold mb-4">Reviews:</h2>
 
