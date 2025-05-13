@@ -58,7 +58,7 @@ def test_database():
     db.save_courses_to_csv(output_path)
     print(f"Courses saved successfully to {output_path}.")
 
-    print("✅ All tests passed.")
+    # print("✅ All tests passed.")
 
 if __name__ == "__main__":
     test_database()

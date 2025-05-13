@@ -89,13 +89,17 @@ class Database:
             self.save_courses_to_csv()  # Save after adding course
 
 
-    def add_review_to_course(self, course_id, review):
+    def add_review_to_course(self, course_id, review, default_difficulty=3.0):
         course = self.get_course(course_id)
         if course:
             course.add_review(review)
-            self.save_courses_to_csv()  # Save after adding course
-            return True
-        return False
+        else:
+            # If course doesn't exist, create it with a default difficulty
+            self.add_course(course_id, default_difficulty)
+            self.get_course(course_id).add_review(review)
+        
+        self.save_courses_to_csv()  # Save after adding review (and course if needed)
+        return True
     
     def get_course_by_id(self, course_id: str):
         for course in self.courses:

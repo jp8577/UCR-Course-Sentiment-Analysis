@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function ReviewForm() {
   const [courseCode, setCourseCode] = useState('');
@@ -43,7 +44,13 @@ export default function ReviewForm() {
 
   return (
     <div className="p-6">
+      <Link href="/">
+        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mb-8">
+          Return to Home
+        </button>
+      </Link>
       <h2 className="text-2xl font-semibold mb-4">Submit Your Review</h2>
+      
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="courseCode" className="block font-medium text-gray-700">
