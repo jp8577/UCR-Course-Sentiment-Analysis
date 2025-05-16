@@ -1,15 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export", // Enable static export
-  trailingSlash: true,
+  output: "export",
   reactStrictMode: true,
   images: {
     loader: "akamai",
     path: "",
-    unoptimized: true, // Disable image optimization (optional)
+    unoptimized: true,
   },
-  basePath: "", // Adjust if you're using a basePath for deployment
-  assetPrefix: "", // If using a CDN, set assetPrefix
+  basePath: "",
+  assetPrefix: "",
 };
 
 module.exports = nextConfig;

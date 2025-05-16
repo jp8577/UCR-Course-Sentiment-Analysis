@@ -18,5 +18,3 @@ class Review:
         analyzer = SIA()
         sentiment = analyzer.polarity_scores(text)
         return sentiment['compound']
-
-        
