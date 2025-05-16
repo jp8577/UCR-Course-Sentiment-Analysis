@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getDifficultyEmoji } from "@/utils/difficultyEmoji";
 
 export async function generateStaticParams() {
   const res = await fetch("http://localhost:8000/api/courses");
@@ -32,7 +33,8 @@ export default async function TopReviewed() {
           <div className="cursor-pointer rounded-lg border p-4 shadow transition hover:shadow-md">
             <h3 className="mb-2 text-xl font-semibold">{course.course_id}</h3>
             <p className="mb-1 text-sm">
-              Avg Difficulty: {course.avg_difficulty}
+              Avg Difficulty: {course.avg_difficulty} 
+              {getDifficultyEmoji(Number(course.avg_difficulty))}
             </p>
             <p className="text-sm text-gray-600">
               {course.reviews.length} reviews
