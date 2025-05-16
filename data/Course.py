@@ -53,5 +53,5 @@ class Course:
     def get_avg_sentiment(self):
         return self.avg_sentiment
     
-    def get_comment_summary(self, review_list):
+    def get_comment_summary(self):
         return self.comment_summary
