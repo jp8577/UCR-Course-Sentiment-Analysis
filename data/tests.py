@@ -14,6 +14,7 @@ if __name__ == "__main__":
     print("review_1: date test passed")
     assert review_1.sentiment_score <= 1 and review_1.sentiment_score >= -1, "Sentiment score is not in the correct range"
     print("review_1: sentiment_score in the appropriate range")
+    print("review_1 comment:", review_1.text)
     print("review_1 sentiment_score:", review_1.sentiment_score, "\n")
 
     review_2 = Review(1, "No tests except Final is writing a story", "3/28/2017 22:41:05")
@@ -25,6 +26,7 @@ if __name__ == "__main__":
     print("review_2: date test passed")
     assert review_2.sentiment_score <= 1 and review_2.sentiment_score >= -1, "Sentiment score is not in the correct range"
     print("review_2: sentiment_score in the appropriate range")
+    print("review_2 comment:", review_2.text)
     print("review_2 sentiment_score:", review_2.sentiment_score, "\n")
 
     review_3 = Review(6, "Brandon Williams, what a guy. Lecture is 3 hours w sign in sheet. " \
@@ -56,6 +58,7 @@ if __name__ == "__main__":
     print("review_3: date test passed")
     assert review_3.sentiment_score <= 1 and review_3.sentiment_score >= -1, "Sentiment score is not in the correct range"
     print("review_3: sentiment_score in the appropriate range")
+    print("review_3 comment:", review_3.text)
     print("review_3 sentiment_score:", review_3.sentiment_score, "\n")
 
     # test Course class
