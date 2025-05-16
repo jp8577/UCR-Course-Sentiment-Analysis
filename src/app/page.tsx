@@ -1,7 +1,7 @@
 import Link from "next/link";
 import TopReviewed from "@/components/TopReviewed";
 
-export default function HomePage() {
+const HomePage = () => {
   return (
     <main className="main">
       <header className="header">
@@ -9,21 +9,12 @@ export default function HomePage() {
         <p className="subtitle">
           Real reviews by UCR students. Find the best classes before you enroll.
         </p>
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search by course code or name..."
-            className="search-input"
-          />
-          <button className="primary-button">Browse All Courses</button>
-        </div>
       </header>
 
       <section className="section">
         <h2 className="section-title">Top Reviewed Courses</h2>
         <TopReviewed />
       </section>
-
 
       <div className="mx-auto flex flex-row justify-between px-24">
         <section className="section pb-10">
