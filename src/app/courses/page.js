@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { getDifficultyEmoji } from "@/utils/difficultyEmoji";
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState([]);
@@ -82,7 +83,8 @@ export default function CoursesPage() {
                   {course.course_id}
                 </h2>
                 <p className="text-gray-600">
-                  Avg Difficulty: {course.avg_difficulty}
+                  Avg Difficulty: {course.avg_difficulty}{" "}
+                  {getDifficultyEmoji(Number(course.avg_difficulty))}
                 </p>
               </div>
             </Link>
