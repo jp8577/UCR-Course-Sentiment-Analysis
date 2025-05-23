@@ -48,7 +48,7 @@ export default async function CoursePage(props) {
                 Difficulty: {review.rating}
               </span>
             </div>
-            <p className="leading-relaxed text-gray-800">{review.comment}</p>
+            <p className="leading-relaxed text-gray-800">{review.text}</p>
           </div>
         ))}
       </div>
