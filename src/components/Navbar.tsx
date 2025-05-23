@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 const Navbar = () => (
-  <nav className="mb-6 w-full bg-white shadow">
-    <div className="container mx-auto flex items-center justify-between px-6 py-3">
+  <nav className="w-full bg-white shadow">
+    <div className="flex items-center justify-between px-6 py-3">
       <Link href="/" className="text-xl font-bold text-blue-700">
         UCR Course Reviews
       </Link>
