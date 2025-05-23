@@ -13,12 +13,27 @@ body {
   @apply min-h-screen bg-gray-50 text-gray-800;
 }
 
-/* Header */
+/* Headers */
 .header {
   @apply w-full text-center text-white shadow-md relative overflow-hidden;
 
   background-image: url('/belltower-banner.png');
   background-color: rgba(37, 99, 235, 0.35); /* blue-600 */
+  background-blend-mode: multiply;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Parallax effect */
+
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+.course-header {
+  @apply w-full text-center text-white shadow-md relative overflow-hidden;
+
+  background-color: rgba(37, 99, 235, 1); /* blue-600 */
   background-blend-mode: multiply;
 
   background-size: cover;
