@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { getDifficultyEmoji } from "@/utils/difficultyEmoji";
 import Papa from "papaparse";
 
 function groupReviews(rows) {
@@ -73,6 +74,7 @@ export default function CourseReviews({ query }) {
                 <strong>Average Difficulty:</strong>{" "}
                 <span className={`font-bold ${difficultyColor}`}>
                   {data.averageDifficulty}
+                  {getDifficultyEmoji(Number(data.averageDifficulty))}
                 </span>
                 <ul className="space-y-4">
                   {data.reviews.map((review, index) => (
