@@ -46,7 +46,10 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} UCR Course Reviews. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} UCR Course Reviews. All rights
+          reserved.
+        </p>
       </footer>
     </main>
   );

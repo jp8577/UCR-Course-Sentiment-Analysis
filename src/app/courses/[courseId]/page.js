@@ -34,7 +34,7 @@ export default async function CoursePage(props) {
         </p>
       </header>
 
-      <h2 className="mb-4 text-2xl font-semibold mt-4">Reviews:</h2>
+      <h2 className="mb-4 mt-4 text-2xl font-semibold">Reviews:</h2>
 
       <div className="space-y-6">
         {course.reviews.map((review, index) => (
