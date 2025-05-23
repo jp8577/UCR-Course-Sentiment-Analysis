@@ -2,55 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Utility Classes */
-.main {
-  @apply min-h-screen bg-gray-100 text-gray-800;
+/* Reset any default body spacing */
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.header {
-  @apply bg-blue-500 px-4 py-12 text-center text-white;
+/* Layout Utilities */
+.main {
+  @apply min-h-screen bg-gray-50 text-gray-800;
 }
+
+/* Header */
+.header {
+  @apply w-full text-center text-white shadow-md relative overflow-hidden;
+
+  background-image: url('/belltower-banner.png');
+  background-color: rgba(37, 99, 235, 0.35); /* blue-600 */
+  background-blend-mode: multiply;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Parallax effect */
+
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+
 
 .title {
-  @apply mb-4 text-4xl font-bold;
+  @apply mb-4 text-5xl font-extrabold tracking-tight drop-shadow-md;
 }
 
 .subtitle {
-  @apply mb-6 text-lg;
+  @apply mb-6 text-xl font-medium drop-shadow;
 }
 
-.search-container {
-  @apply flex flex-wrap justify-center gap-2;
-}
-
-.search-input {
-  @apply w-72 rounded p-2 text-black;
-}
-
+/* Buttons */
 .primary-button {
-  @apply rounded bg-pink-400 px-4 py-2 text-white hover:bg-pink-500;
+  @apply rounded-lg bg-blue-600 px-5 py-2.5 text-white font-medium hover:bg-blue-700 transition;
 }
 
+/* Flex Section Layout */
+.section-flex {
+  @apply flex flex-col md:flex-row gap-8 px-6 md:px-12 lg:px-20 py-10;
+}
+
+.section-flex > .section {
+  @apply flex-1;
+}
+
+/* Section Styling */
 .section {
-  @apply px-14 py-10;
+  @apply px-6 md:px-12 lg:px-20 py-10 bg-white shadow rounded-xl;
 }
 
 .section-title {
-  @apply mb-4 text-2xl font-semibold;
+  @apply mb-4 text-xl md:text-2xl font-semibold text-gray-700;
 }
 
+/* Lists */
+.instruction-list {
+  @apply list-inside list-decimal space-y-2;
+}
+
+/* Course Cards */
 .course-list {
   @apply space-y-4;
 }
 
 .course-card {
-  @apply border-l-4 border-pink-500 bg-white p-4 shadow;
+  @apply border-l-4 border-blue-500 bg-white p-4 shadow-md hover:shadow-lg transition rounded;
 }
 
-.instruction-list {
-  @apply list-inside list-decimal space-y-2;
+/* Search */
+.search-container {
+  @apply flex flex-wrap justify-center gap-2;
 }
 
+.search-input {
+  @apply w-72 rounded p-2 text-black border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300;
+}
+
+/* Footer */
 .footer {
-  @apply bg-gray-800 py-4 text-center text-white;
+  @apply bg-gray-800 py-6 text-center text-white text-sm;
 }
