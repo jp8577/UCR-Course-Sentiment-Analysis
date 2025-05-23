@@ -93,10 +93,6 @@ class Database:
         course = self.get_course(course_id)
         if course:
             course.add_review(review)
-        else:
-            # If course doesn't exist, create it with a default difficulty
-            self.add_course(course_id, default_difficulty)
-            self.get_course(course_id).add_review(review)
         
         self.save_courses_to_csv()  # Save after adding review (and course if needed)
         return True

@@ -5,6 +5,8 @@ from pydantic import BaseModel
 from typing import List
 import sys
 import os
+from datetime import datetime
+
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from data.Database import Database
@@ -18,7 +20,7 @@ app = FastAPI()
 # CORS middleware (if calling from a frontend like Next.js)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # or specify your frontend URL
+    allow_origins=["http://localhost:3000"],  # or specify your frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -32,13 +34,21 @@ print(f"Loaded {len(db.courses)} courses.")
 # Pydantic models
 class Review(BaseModel):
     rating: float
-    comment: str
+    text: str
     date_posted: str
 
 class Course(BaseModel):
     course_id: str
     avg_difficulty: float
     reviews: List[Review]
+
+from pydantic import BaseModel
+
+class ReviewSubmission(BaseModel):
+    course_id: str
+    rating: float
+    comment: str
+
 
 # Routes
 @app.get("/")
@@ -53,7 +63,7 @@ def get_courses():
         reviews = [
             {
                 'rating': review.rating,
-                'comment': review.text,
+                'text': review.text,
                 'date_posted': review.date_posted
             } for review in course.review_list
         ]
@@ -77,7 +87,7 @@ def get_course(course_id: str):
     reviews = [
         {
             'rating': review.rating,
-            'comment': review.text,
+            'text': review.text,
             'date_posted': review.date_posted
         } for review in course.review_list
     ]
@@ -87,3 +97,19 @@ def get_course(course_id: str):
         'avg_difficulty': course.avg_difficulty,
         'reviews': reviews
     }
+
+@app.post("/api/reviews")
+def submit_review(review_submission: ReviewSubmission):
+    course_id = review_submission.course_id
+    rating = review_submission.rating
+    comment = review_submission.comment
+
+    review = Review(rating=rating, text=comment, date_posted=datetime.utcnow().isoformat())
+
+    # Add the review to the course (or create course if not exists)
+    db.add_review_to_course(course_id, review)
+
+    # Save changes persistently
+    db.save_courses_to_csv()
+
+    return {"message": "Review submitted successfully"}

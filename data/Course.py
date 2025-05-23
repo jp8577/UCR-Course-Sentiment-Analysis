@@ -52,7 +52,7 @@ class Course:
     # Methods that needed to be implemented for Database class
     def add_review(self, review):
         self.review_list.append(review)
-        #self.update_avg_difficulty()
+        self.update_avg_difficulty()
         
 
     def get_avg_sentiment(self):
@@ -64,7 +64,5 @@ class Course:
     def update_avg_difficulty(self):
         if self.review_list:
             total_difficulty = sum([review.rating for review in self.review_list])
-            self.avg_difficulty = total_difficulty / len(self.review_list)
-        else:
-            self.avg_difficulty = 0.0 
+            self.avg_difficulty = round(total_difficulty / len(self.review_list), 2)
       
