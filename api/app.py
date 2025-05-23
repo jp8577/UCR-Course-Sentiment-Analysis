@@ -28,7 +28,7 @@ app.add_middleware(
 
 # Initialize database
 db = Database()
-db.load_courses_from_csv('public/UCR class difficulty database - Sheet1.csv')
+db.load_courses_from_csv('saved_courses.csv')
 print(f"Loaded {len(db.courses)} courses.")
 
 # Pydantic models
@@ -88,7 +88,7 @@ def get_course(course_id: str):
         {
             'rating': review.rating,
             'text': review.text,
-            'date_posted': review.date_posted
+            'date_posted': review.date_posted.strftime('%-m/%-d/%Y')
         } for review in course.review_list
     ]
     
@@ -104,7 +104,7 @@ def submit_review(review_submission: ReviewSubmission):
     rating = review_submission.rating
     comment = review_submission.comment
 
-    review = Review(rating=rating, text=comment, date_posted=datetime.utcnow().isoformat())
+    review = Review(rating=rating, text=comment, date_posted=datetime.utcnow().strftime('%-m/%-d/%Y'))
 
     # Add the review to the course (or create course if not exists)
     db.add_review_to_course(course_id, review)

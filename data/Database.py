@@ -86,7 +86,7 @@ class Database:
     def add_course(self, course_id, avg_difficulty=1.0):
         if course_id not in self.courses:
             self.courses[course_id] = Course(course_id, avg_difficulty, [])
-            self.save_courses_to_csv()  # Save after adding course
+            #self.save_courses_to_csv()  # Save after adding course
 
 
     def add_review_to_course(self, course_id, review, default_difficulty=3.0):
