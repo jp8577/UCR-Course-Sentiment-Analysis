@@ -4,6 +4,7 @@ import TopReviewed from "@/components/TopReviewed";
 const HomePage = () => {
   return (
     <main className="main">
+      {/* Header */}
       <header className="header">
         <h1 className="title">UCR Course Reviews</h1>
         <p className="subtitle">
@@ -11,13 +12,15 @@ const HomePage = () => {
         </p>
       </header>
 
+      {/* Top Courses */}
       <section className="section">
         <h2 className="section-title">Top Reviewed Courses</h2>
         <TopReviewed />
       </section>
 
-      <div className="mx-auto flex flex-row justify-between px-24">
-        <section className="section pb-10">
+      {/* How It Works / Explore / Submit */}
+      <div className="section-flex">
+        <section className="section">
           <h2 className="section-title">How It Works</h2>
           <ol className="instruction-list">
             <li>Search for a course.</li>
@@ -33,18 +36,20 @@ const HomePage = () => {
           </Link>
         </section>
 
-        {/* Updated section with a link to the reviews page */}
         <section className="section text-center">
           <h2 className="section-title">Submit Your Review</h2>
-          {/* Button linking to the review submission page */}
           <Link href="/reviews">
             <button className="primary-button">Submit a Review</button>
           </Link>
         </section>
       </div>
 
+      {/* Footer */}
       <footer className="footer">
-        <p></p>
+        <p>
+          &copy; {new Date().getFullYear()} UCR Course Reviews. All rights
+          reserved.
+        </p>
       </footer>
     </main>
   );
