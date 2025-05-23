@@ -20,70 +20,71 @@ class Database:
                 row_num = 1
                 for row in reader:
 
-                    # this skips the first 2 rows of the cvs which is just the titles and some messages
-                    if (row_num == 1 or row_num == 2):
-                        row_num += 1
-                    else:
-                        course_id = row['Class'].strip()
+                    # # this skips the first 2 rows of the cvs which is just the titles and some messages
+                    # if (row_num == 1 or row_num == 2):
+                    #     row_num += 1
+                    #     continue
+                    # else:
+                        # course_id = row['Class'].strip()
 
-                        if (course_id != '' and (row.get('Additional Comments', '') == '' and row.get('Difficulty', '') == '' and row.get('Date', '') == '')):
-                            print("Skipping ", course_id, ". ", row.get('Average Difficulty', ''), sep="")
-                        elif (course_id or (row.get('Additional Comments', '') == '' and row.get('Difficulty', '') == '' and row.get('Date', '') == '')):
-                            # process the old class
-                            if (current_course != None):
-                                new_course = Course(current_course, avg_difficulty, reviews)
-                                self.courses[current_course] = new_course
-                                reviews.clear()
+                    #     if (course_id != '' and (row.get('Additional Comments', '') == '' and row.get('Difficulty', '') == '' and row.get('Date', '') == '')):
+                    #         print("Skipping ", course_id, ". ", row.get('Average Difficulty', ''), sep="")
+                    #     elif (course_id or (row.get('Additional Comments', '') == '' and row.get('Difficulty', '') == '' and row.get('Date', '') == '')):
+                    #         # process the old class
+                    #         if (current_course != None):
+                    #             new_course = Course(current_course, avg_difficulty, reviews)
+                    #             self.courses[current_course] = new_course
+                    #             reviews.clear()
 
-                            # start with the new class
-                            current_course = course_id
-                            avg_difficulty = float(row.get('Average Difficulty'))
+                    #         # start with the new class
+                    #         current_course = course_id
+                    #         avg_difficulty = float(row.get('Average Difficulty'))
                         
+                    #     comment_text = row.get('Additional Comments', '').strip()
+                    #     difficulty = float(row.get('Difficulty', '').strip())
+                    #     date_posted = row.get('Date', '').strip()
+                    #     new_review = Review(difficulty, comment_text, date_posted)
+                    #     reviews.append(new_review)
+
+
+
+
+
+                        # If there's a new course, create it and store in dict
+                        if course_id:
+                            try:
+                                avg_difficulty = float(row.get('Average Difficulty'))
+                                current_course = Course(course_id, avg_difficulty, [])
+                                self.courses[course_id] = current_course
+                            except ValueError:
+                                # Skip this course if avg_difficulty cannot be converted to a float
+                                print(f"Skipping course {course_id} due to invalid average difficulty: {row.get('Average Difficulty')}")
+                                current_course = None  # Reset current course
+                                continue  # Skip to the next course
+
+
+                        # If no course has been initialized yet (i.e. first row was invalid)
+                        if current_course is None:
+                            continue
+
+                        # Process additional comments if present
                         comment_text = row.get('Additional Comments', '').strip()
-                        difficulty = float(row.get('Difficulty', '').strip())
-                        date_posted = row.get('Date', '').strip()
-                        new_review = Review(difficulty, comment_text, date_posted)
-                        reviews.append(new_review)
+                        if comment_text:
+                            difficulty_str = row.get('Difficulty', '').strip()
 
-
-
-
-
-                        # # If there's a new course, create it and store in dict
-                        # if course_id:
-                        #     try:
-                        #         avg_difficulty = float(row.get('Average Difficulty'))
-                        #         current_course = Course(course_id, avg_difficulty, [])
-                        #         self.courses[course_id] = current_course
-                        #     except ValueError:
-                        #         # Skip this course if avg_difficulty cannot be converted to a float
-                        #         print(f"Skipping course {course_id} due to invalid average difficulty: {row.get('Average Difficulty')}")
-                        #         current_course = None  # Reset current course
-                        #         continue  # Skip to the next course
-
-
-                        # # If no course has been initialized yet (i.e. first row was invalid)
-                        # if current_course is None:
-                        #     continue
-
-                        # # Process additional comments if present
-                        # comment_text = row.get('Additional Comments', '').strip()
-                        # if comment_text:
-                        #     difficulty_str = row.get('Difficulty', '').strip()
-
-                        # # Check if difficulty is a valid number and not empty
-                        # if difficulty_str:
-                        #     try:
-                        #         rating = float(difficulty_str)
-                        #         date_posted = row.get('Date')
-                        #         review = Review(rating, comment_text, date_posted)
-                        #         current_course.add_review(review)
-                        #     except ValueError:
-                        #         # Skip this review if Difficulty cannot be converted to a float
-                        #         print(f"Skipping review for course {course_id} due to invalid rating: {difficulty_str}")
-                        # else:
-                        #     # Skip review if difficulty is empty
-                        #     print(f"Skipping review for course {course_id} due to missing difficulty rating")
+                        # Check if difficulty is a valid number and not empty
+                        if difficulty_str:
+                            try:
+                                rating = float(difficulty_str)
+                                date_posted = row.get('Date')
+                                review = Review(rating, comment_text, date_posted)
+                                current_course.add_review(review)
+                            except ValueError:
+                                # Skip this review if Difficulty cannot be converted to a float
+                                print(f"Skipping review for course {course_id} due to invalid rating: {difficulty_str}")
+                        else:
+                            # Skip review if difficulty is empty
+                            print(f"Skipping review for course {course_id} due to missing difficulty rating")
 
 
         except FileNotFoundError:

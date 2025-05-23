@@ -44,17 +44,18 @@ class Course:
 
 
     def __summarize_comments(self, review_list):
-        if (len(review_list) == 0): return ""
-        combined_comments = ""
-        for review in review_list:
-            combined_comments = combined_comments + " " + review.text
+        # if (len(review_list) == 0): return ""
+        # combined_comments = ""
+        # for review in review_list:
+        #     combined_comments = combined_comments + " " + review.text
 
-        device = 0 if torch.cuda.is_available() else -1
-        # summarizer = pipeline('summarization')
-        summarizer = pipeline('summarization', device=device)
-        words = re.findall(r'\b\w+\b', combined_comments)
-        summary = summarizer(combined_comments, max_length=len(words), min_length=0, do_sample=False)
-        return summary[0]['summary_text']
+        # device = 0 if torch.cuda.is_available() else -1
+        # # summarizer = pipeline('summarization')
+        # summarizer = pipeline('summarization', device=device)
+        # words = re.findall(r'\b\w+\b', combined_comments)
+        # summary = summarizer(combined_comments, max_length=len(words), min_length=0, do_sample=False)
+        # return summary[0]['summary_text']
+        return "testing"
       
     # Methods that needed to be implemented for Database class
     def add_review(self, review):
