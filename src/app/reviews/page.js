@@ -1,37 +1,41 @@
-'use client'
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 
 export default function ReviewForm() {
-  const [courseId, setCourseId] = useState('');
-  const [rating, setRating] = useState('');
-  const [text, setText] = useState('');
+  const [courseId, setCourseId] = useState("");
+  const [rating, setRating] = useState("");
+  const [text, setText] = useState("");
   const [status, setStatus] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!courseId || !rating || !text) {
-      setStatus('Please fill all fields.');
+      setStatus("Please fill all fields.");
       return;
     }
 
-    const reviewData = { course_id: courseId, rating: parseFloat(rating), comment: text };
+    const reviewData = {
+      course_id: courseId,
+      rating: parseFloat(rating),
+      comment: text,
+    };
 
     try {
-      const res = await fetch('http://localhost:8000/api/reviews', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("http://localhost:8000/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reviewData),
       });
 
       if (res.ok) {
-        setStatus('✅ Review submitted successfully!');
-        setCourseId('');
-        setRating('');
-        setText('');
+        setStatus("✅ Review submitted successfully!");
+        setCourseId("");
+        setRating("");
+        setText("");
       } else {
         const data = await res.json();
-        setStatus(`❌ Error: ${data.message || 'Failed to submit review'}`);
+        setStatus(`❌ Error: ${data.message || "Failed to submit review"}`);
       }
     } catch (error) {
       setStatus(`❌ Error submitting review: ${error}`);
@@ -39,29 +43,29 @@ export default function ReviewForm() {
   };
 
   const boxStyle = {
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    padding: '12px',
-    marginBottom: '16px',
-    backgroundColor: '#f9f9f9'
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    padding: "12px",
+    marginBottom: "16px",
+    backgroundColor: "#f9f9f9",
   };
 
   const labelStyle = {
-    display: 'block',
-    marginBottom: '8px',
-    fontWeight: 'bold'
+    display: "block",
+    marginBottom: "8px",
+    fontWeight: "bold",
   };
 
   const inputStyle = {
-    width: '100%',
-    padding: '8px',
-    borderRadius: '4px',
-    border: '1px solid #ddd'
+    width: "100%",
+    padding: "8px",
+    borderRadius: "4px",
+    border: "1px solid #ddd",
   };
 
   return (
-    <div style={{ maxWidth: 500, margin: 'auto', padding: '20px' }}>
-      <h1 style={{ textAlign: 'center' }}>Submit a Review</h1>
+    <div style={{ maxWidth: 500, margin: "auto", padding: "20px" }}>
+      <h1 style={{ textAlign: "center" }}>Submit a Review</h1>
       <form onSubmit={handleSubmit}>
         <div style={boxStyle}>
           <label style={labelStyle}>Course ID:</label>
@@ -92,21 +96,21 @@ export default function ReviewForm() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows="5"
-            style={{ ...inputStyle, resize: 'vertical' }}
+            style={{ ...inputStyle, resize: "vertical" }}
           />
         </div>
 
         <button
           type="submit"
           style={{
-            width: '100%',
-            padding: '12px',
-            backgroundColor: '#0070f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '8px',
-            fontWeight: 'bold',
-            cursor: 'pointer'
+            width: "100%",
+            padding: "12px",
+            backgroundColor: "#0070f3",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            fontWeight: "bold",
+            cursor: "pointer",
           }}
         >
           Submit Review
@@ -114,7 +118,11 @@ export default function ReviewForm() {
       </form>
 
       {status && (
-        <p style={{ marginTop: '20px', textAlign: 'center', fontWeight: 'bold' }}>{status}</p>
+        <p
+          style={{ marginTop: "20px", textAlign: "center", fontWeight: "bold" }}
+        >
+          {status}
+        </p>
       )}
     </div>
   );
