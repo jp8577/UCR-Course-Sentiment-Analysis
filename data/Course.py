@@ -5,6 +5,8 @@ from data.Review import Review
 # pip install --upgrade transformers
 # pip install torch
 
+import re
+import torch
 import transformers
 from transformers import pipeline
 # summarizer = pipeline('summarization')
@@ -34,8 +36,10 @@ class Course:
         sum = 0
         counter = 0
         for review in reviews:
-            sum += review.rating
+            # sum += review.rating
+            sum += review.sentiment_score
             counter += 1
+        # print("sentiment found:", (sum / counter))
         return (sum / counter)
 
 
@@ -45,13 +49,18 @@ class Course:
         for review in review_list:
             combined_comments = combined_comments + " " + review.text
 
-        summarizer = pipeline('summarization')
-        summary = summarizer(combined_comments, max_length=130, min_length=25, do_sample=False)
+        device = 0 if torch.cuda.is_available() else -1
+        # summarizer = pipeline('summarization')
+        summarizer = pipeline('summarization', device=device)
+        words = re.findall(r'\b\w+\b', combined_comments)
+        summary = summarizer(combined_comments, max_length=len(words), min_length=0, do_sample=False)
         return summary[0]['summary_text']
       
     # Methods that needed to be implemented for Database class
     def add_review(self, review):
         self.review_list.append(review)
+        self.avg_sentiment = self.__calculate_avg_sentiment(self.review_list)
+        self.comment_summary = self.__summarize_comments(self.review_list)
         #self.update_avg_difficulty()
         
 
