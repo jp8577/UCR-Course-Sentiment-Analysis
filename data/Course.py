@@ -82,9 +82,6 @@ class Course:
         '''
         if (review.text == ""):
             return
-        
-        # if (self.course_id != "ART010" and self.course_id != "ART006" and self.course_id != "ART032"):
-        #     return
 
         # if the review puts us over the 700 word limit, summarize the current summary with the unsummarized reviews
         # NEVER SUMMARIZE MORE THAN 700 WORDS AT ONCE
@@ -114,9 +111,6 @@ class Course:
         checks if we're up to date. If the summary is up to date, we return the comment and if it's not up
         to date, we make it up to date.
         '''
-        # if (self.course_id != "ART010" and self.course_id != "ART006" and self.course_id != "ART032"):
-        #     return "placeholder"
-
         if (len(self.review_list) == 0):
             return "No comments."
         elif (self.__reviews_summarized != len(self.review_list)):
