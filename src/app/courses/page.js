@@ -17,7 +17,7 @@ export default function CoursesPage() {
       .then((response) => response.json())
       .then((data) => setCourses(data))
       .catch((error) => console.error("Error fetching courses:", error));
-  
+
     // Fetch and parse course_summary.csv
     Papa.parse("/course_summary.csv", {
       download: true,
@@ -35,7 +35,7 @@ export default function CoursesPage() {
         console.error("Error loading course summary CSV:", error);
       },
     });
-  }, []);  
+  }, []);
 
   const handleSearch = () => {
     if (searchTerm.trim() === "") return;
@@ -108,10 +108,10 @@ export default function CoursesPage() {
                 </p>
                 {/* Comment Summary Section */}
                 <div className="mt-4 rounded bg-gray-50 p-3">
-                  <h3 className="text-sm font-semibold text-gray-700 mb-1">
+                  <h3 className="mb-1 text-sm font-semibold text-gray-700">
                     Course Summary:
                   </h3>
-                  <p className="text-gray-700 text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed text-gray-700">
                     {summaries[course.course_id] || "No summary available."}
                   </p>
                 </div>

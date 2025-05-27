@@ -34,7 +34,7 @@ export default async function TopReviewed() {
           <div className="cursor-pointer rounded-lg border p-4 shadow transition hover:shadow-md">
             <h3 className="mb-2 text-xl font-semibold">{course.course_id}</h3>
             <p className="mb-1 text-sm">
-              Avg Difficulty: {course.avg_difficulty}
+              Avg Difficulty: {Number(course.avg_difficulty).toFixed(2)}{" "}
               {getDifficultyEmoji(Number(course.avg_difficulty))}
             </p>
             <p className="text-sm text-gray-600">

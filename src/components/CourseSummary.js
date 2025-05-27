@@ -22,8 +22,10 @@ export default function CourseSummary({ courseId }) {
 
   return (
     <div className="mt-4 rounded-lg bg-gray-50 p-4 shadow-sm">
-      <h3 className="mb-2 text-lg font-semibold text-gray-700">Course Summary:</h3>
-      <p className="text-gray-800 leading-relaxed">{summary}</p>
+      <h3 className="mb-2 text-lg font-semibold text-gray-700">
+        Course Summary:
+      </h3>
+      <p className="leading-relaxed text-gray-800">{summary}</p>
     </div>
   );
 }
