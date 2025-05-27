@@ -27,6 +27,8 @@ app.add_middleware(
 # Initialize database
 db = Database()
 db.load_courses_from_csv('public/UCR class difficulty database - Sheet1.csv')
+#db.export_summary_csv("course_summary.csv")
+
 print(f"Loaded {len(db.courses)} courses.")
 
 # Pydantic models
