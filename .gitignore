@@ -36,5 +36,10 @@ next-env.d.ts
 
 .env
 
+
 __pycache__/
 *.pyc
+
+pycache/
+*.pyc
+
