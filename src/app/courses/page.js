@@ -1,5 +1,6 @@
 "use client";
 
+import Papa from "papaparse";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -7,6 +8,7 @@ import { getDifficultyEmoji } from "@/utils/difficultyEmoji";
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState([]);
+  const [summaries, setSummaries] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
 
@@ -15,7 +17,25 @@ export default function CoursesPage() {
       .then((response) => response.json())
       .then((data) => setCourses(data))
       .catch((error) => console.error("Error fetching courses:", error));
-  }, []);
+  
+    // Fetch and parse course_summary.csv
+    Papa.parse("/course_summary.csv", {
+      download: true,
+      header: true,
+      complete: (results) => {
+        // Assuming CSV has headers: CourseName, AverageSentimentScore, SentimentLabel
+        const summaryMap = {};
+        results.data.forEach((row) => {
+          // Store the summary text (SentimentLabel or other) keyed by course name
+          summaryMap[row.CourseName] = row.SentimentLabel || "";
+        });
+        setSummaries(summaryMap);
+      },
+      error: (error) => {
+        console.error("Error loading course summary CSV:", error);
+      },
+    });
+  }, []);  
 
   const handleSearch = () => {
     if (searchTerm.trim() === "") return;
@@ -71,7 +91,7 @@ export default function CoursesPage() {
       {courses.length === 0 ? (
         <p>Loading courses...</p>
       ) : (
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
           {courses.map((course) => (
             <Link
               key={course.course_id}
@@ -86,6 +106,15 @@ export default function CoursesPage() {
                   Avg Difficulty: {course.avg_difficulty}{" "}
                   {getDifficultyEmoji(Number(course.avg_difficulty))}
                 </p>
+                {/* Comment Summary Section */}
+                <div className="mt-4 rounded bg-gray-50 p-3">
+                  <h3 className="text-sm font-semibold text-gray-700 mb-1">
+                    Course Summary:
+                  </h3>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    {summaries[course.course_id] || "No summary available."}
+                  </p>
+                </div>
               </div>
             </Link>
           ))}

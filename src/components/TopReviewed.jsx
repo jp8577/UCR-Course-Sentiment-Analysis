@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getDifficultyEmoji } from "@/utils/difficultyEmoji";
+import CourseSummary from "@/components/CourseSummary";
 
 export async function generateStaticParams() {
   const res = await fetch("http://localhost:8000/api/courses");
@@ -39,6 +40,7 @@ export default async function TopReviewed() {
             <p className="text-sm text-gray-600">
               {course.reviews.length} reviews
             </p>
+            <CourseSummary courseId={course.course_id} />
           </div>
         </Link>
       ))}
