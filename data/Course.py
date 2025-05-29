@@ -54,7 +54,6 @@ class Course:
         1024 tokens. However, our current implementation adds reviews one by one so this shouldn't
         be a problem.
         '''
-        print("summarizing", self.course_id)
         # if there are no reviews, return a blank string
         if (len(review_list) == 0): return ""
 
@@ -95,12 +94,10 @@ class Course:
             # summarize the comments we have
             device = 0 if torch.cuda.is_available() else -1
             words = re.findall(r'\b\w+\b', combined_comments)
-            print("one round of summary")
             summary = summarizer(combined_comments, max_length=len(words), min_length=0, do_sample=False)
             self.comment_summary = summary[0]['summary_text']
 
             # if there are still more reviews to summarize, we'll repeat the whole process
-        print("done summarizing", self.course_id, "\n")
         return self.comment_summary
       
     # Methods that needed to be implemented for Database class
