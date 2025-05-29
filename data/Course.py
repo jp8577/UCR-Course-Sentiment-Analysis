@@ -10,7 +10,7 @@ import re
 import torch
 from transformers import pipeline
 # summarizer = pipeline('summarization')
-
+summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6", device=0)
 class Course:
     def __init__(self, course_id, avg_difficulty, review_list):
         self.course_id = course_id
@@ -60,7 +60,7 @@ class Course:
             combined_comments = combined_comments + " " + review.text
 
         device = 0 if torch.cuda.is_available() else -1
-        summarizer = pipeline('summarization', model="sshleifer/distilbart-cnn-12-6", device=0)
+
         words = re.findall(r'\b\w+\b', combined_comments)
         summary = summarizer(combined_comments, max_length=len(words), min_length=0, do_sample=False)
         
