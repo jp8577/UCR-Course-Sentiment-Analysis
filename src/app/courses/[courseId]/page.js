@@ -1,4 +1,5 @@
 import { getDifficultyEmoji } from "@/utils/difficultyEmoji";
+import { getSentimentEmoji } from "@/utils/sentimentEmoji";
 
 export async function generateStaticParams() {
   const res = await fetch("http://localhost:8000/api/courses");
@@ -32,6 +33,12 @@ export default async function CoursePage(props) {
         <p className="subtitle">
           <strong>Average Difficulty:</strong> {course.avg_difficulty}{" "}
           {getDifficultyEmoji(Number(course.avg_difficulty))}
+        </p>
+        <p className="subtitle mt-1">
+          <strong>Sentiment Score:</strong>{" "}
+          <span style={{ fontSize: "1.5rem", marginLeft: "0.5rem" }}>
+            {getSentimentEmoji(Number(course.avg_sentiment))}
+          </span>
         </p>
       </header>
 
