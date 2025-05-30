@@ -68,7 +68,7 @@ body {
 }
 
 .subtitle-search {
-  @apply text-xl font-bold text-white cursor-pointer transition drop-shadow-lg hover:text-blue-200 hover:scale-105;
+  @apply cursor-pointer text-xl font-bold text-white drop-shadow-lg transition hover:scale-105 hover:text-blue-200;
   margin-top: 100px;
   margin-bottom: -50px;
 }

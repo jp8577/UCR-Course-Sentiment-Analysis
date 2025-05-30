@@ -46,7 +46,7 @@ export default function CoursesPage() {
 
   // Filter courses by partial case-insensitive match
   const filteredCourses = courses.filter((course) =>
-    course.course_id.toLowerCase().includes(searchTerm.trim().toLowerCase())
+    course.course_id.toLowerCase().includes(searchTerm.trim().toLowerCase()),
   );
 
   // const handleSearch = () => {
@@ -75,13 +75,13 @@ export default function CoursesPage() {
           Real reviews by UCR students. Find the best classes before you enroll.
         </p>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-           <input
+          <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by Course ID"
             className="w-72 rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-           />
+          />
         </div>
       </header>
 
