@@ -27,6 +27,8 @@ app.add_middleware(
 # Initialize database
 db = Database()
 db.load_courses_from_csv('public/UCR class difficulty database - Sheet1.csv')
+#db.export_summary_csv("course_summary.csv")
+
 print(f"Loaded {len(db.courses)} courses.")
 
 # Pydantic models
@@ -38,7 +40,20 @@ class Review(BaseModel):
 class Course(BaseModel):
     course_id: str
     avg_difficulty: float
+    avg_sentiment: float
     reviews: List[Review]
+
+# Helper function to compute avg_sentiment for a course
+def compute_avg_sentiment(course) -> float:
+    # Check if reviews have sentiment_score attribute, else 0
+    sentiments = [
+        getattr(review, 'sentiment_score', 0) 
+        for review in course.review_list
+        if hasattr(review, 'sentiment_score')
+    ]
+    if not sentiments:
+        return 0.0
+    return sum(sentiments) / len(sentiments)
 
 # Routes
 @app.get("/")
@@ -57,9 +72,13 @@ def get_courses():
                 'date_posted': review.date_posted
             } for review in course.review_list
         ]
+
+        avg_sentiment = compute_avg_sentiment(course)
+
         course_data.append({
             'course_id': course.course_id,
             'avg_difficulty': course.avg_difficulty,
+            'avg_sentiment': avg_sentiment,
             'reviews': reviews
         })
     return course_data
@@ -82,8 +101,11 @@ def get_course(course_id: str):
         } for review in course.review_list
     ]
     
+    avg_sentiment = compute_avg_sentiment(course)
+
     return {
         'course_id': course.course_id,
         'avg_difficulty': course.avg_difficulty,
+        'avg_sentiment': avg_sentiment,
         'reviews': reviews
     }

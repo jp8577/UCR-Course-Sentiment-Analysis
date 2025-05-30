@@ -1,11 +1,14 @@
 "use client";
 
+import Papa from "papaparse";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { getDifficultyEmoji } from "@/utils/difficultyEmoji";
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState([]);
+  const [summaries, setSummaries] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -20,6 +23,11 @@ export default function CoursesPage() {
         console.error("Error fetching courses:", error);
         setIsLoading(false);
       });
+
+    // Fetchand parse course_summary.csv
+    Papa.parse("/course_summary.csv", {
+      download: true,
+      he
   }, []);
 
   // Filter courses by partial case-insensitive match
@@ -70,8 +78,18 @@ export default function CoursesPage() {
                   {course.course_id}
                 </h2>
                 <p className="text-gray-600">
-                  Avg Difficulty: {course.avg_difficulty}
+                  Avg Difficulty: {course.avg_difficulty}{" "}
+                  {getDifficultyEmoji(Number(course.avg_difficulty))}
                 </p>
+                {/* Comment Summary Section */}
+                <div className="mt-4 rounded bg-gray-50 p-3">
+                  <h3 className="mb-1 text-sm font-semibold text-gray-700">
+                    Course Summary:
+                  </h3>
+                  <p className="text-sm leading-relaxed text-gray-700">
+                    {summaries[course.course_id] || "No summary available."}
+                  </p>
+                </div>
               </div>
             </Link>
           ))}
