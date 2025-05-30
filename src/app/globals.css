@@ -24,10 +24,24 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Parallax effect */
+  background-attachment: fixed;
 
   padding-top: 10rem;
   padding-bottom: 10rem;
+}
+
+/* Dark overlay for readability */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 0;
+}
+
+.header > * {
+  position: relative;
+  z-index: 10;
 }
 
 .course-header {
@@ -39,18 +53,24 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Parallax effect */
+  background-attachment: fixed;
 
   padding-top: 10rem;
   padding-bottom: 10rem;
 }
 
 .title {
-  @apply mb-4 text-5xl font-extrabold tracking-tight drop-shadow-md;
+  @apply mb-4 text-5xl font-extrabold tracking-tight drop-shadow-lg;
 }
 
 .subtitle {
-  @apply mb-6 text-xl font-medium drop-shadow;
+  @apply mb-6 text-xl font-medium drop-shadow-lg;
+}
+
+.subtitle-search {
+  @apply text-xl font-bold text-white cursor-pointer transition drop-shadow-lg hover:text-blue-200 hover:scale-105;
+  margin-top: 100px;
+  margin-bottom: -50px;
 }
 
 /* Buttons */

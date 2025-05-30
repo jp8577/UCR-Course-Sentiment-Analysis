@@ -10,6 +10,9 @@ const HomePage = () => {
         <p className="subtitle">
           Real reviews by UCR students. Find the best classes before you enroll.
         </p>
+        <Link href="/courses">
+          <p className="subtitle-search">Browse all courses →</p>
+        </Link>
       </header>
 
       {/* Top Courses */}
@@ -17,32 +20,6 @@ const HomePage = () => {
         <h2 className="section-title">Top Reviewed Courses</h2>
         <TopReviewed />
       </section>
-
-      {/* How It Works / Explore / Submit */}
-      <div className="section-flex">
-        <section className="section">
-          <h2 className="section-title">How It Works</h2>
-          <ol className="instruction-list">
-            <li>Search for a course.</li>
-            <li>Read student reviews.</li>
-            <li>Submit your own to help others!</li>
-          </ol>
-        </section>
-
-        <section className="section text-center">
-          <h2 className="section-title">Explore All Courses</h2>
-          <Link href="/courses">
-            <button className="primary-button">Go to Courses</button>
-          </Link>
-        </section>
-
-        <section className="section text-center">
-          <h2 className="section-title">Submit Your Review</h2>
-          <Link href="/reviews">
-            <button className="primary-button">Submit a Review</button>
-          </Link>
-        </section>
-      </div>
 
       {/* Footer */}
       <footer className="footer">
