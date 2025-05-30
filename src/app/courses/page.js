@@ -3,7 +3,6 @@
 import Papa from "papaparse";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { getDifficultyEmoji } from "@/utils/difficultyEmoji";
 
 export default function CoursesPage() {
@@ -11,7 +10,6 @@ export default function CoursesPage() {
   const [summaries, setSummaries] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     fetch("http://localhost:8000/api/courses")
