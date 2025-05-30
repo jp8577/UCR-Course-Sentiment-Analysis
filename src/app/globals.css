@@ -18,7 +18,7 @@ body {
   @apply relative w-full overflow-hidden text-center text-white shadow-md;
 
   background-image: url("/belltower-banner.png");
-  background-color: rgba(37, 99, 235, 0.35); /* blue-600 */
+  background-color: rgba(37, 99, 235, 0.2); /* blue-600 */
   background-blend-mode: multiply;
 
   background-size: cover;
@@ -35,7 +35,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 0;
 }
 

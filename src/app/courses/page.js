@@ -11,6 +11,7 @@ export default function CoursesPage() {
   const [summaries, setSummaries] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     fetch("http://localhost:8000/api/courses")
@@ -24,16 +25,47 @@ export default function CoursesPage() {
         setIsLoading(false);
       });
 
-    // Fetchand parse course_summary.csv
+    // Fetch and parse course_summary.csv
     Papa.parse("/course_summary.csv", {
       download: true,
-      he
+      header: true,
+      complete: (results) => {
+        // Assuming CSV has headers: CourseName, AverageSentimentScore, SentimentLabel
+        const summaryMap = {};
+        results.data.forEach((row) => {
+          // Store the summary text (SentimentLabel or other) keyed by course name
+          summaryMap[row.CourseName] = row.SentimentLabel || "";
+        });
+        setSummaries(summaryMap);
+      },
+      error: (error) => {
+        console.error("Error loading course summary CSV:", error);
+      },
+    });
   }, []);
 
   // Filter courses by partial case-insensitive match
   const filteredCourses = courses.filter((course) =>
     course.course_id.toLowerCase().includes(searchTerm.trim().toLowerCase())
   );
+
+  // const handleSearch = () => {
+  //   if (searchTerm.trim() === "") return;
+
+  //   // Normalize input and course IDs to uppercase for comparison
+  //   const normalizedSearch = searchTerm.trim().toUpperCase();
+
+  //   const foundCourse = courses.find(
+  //     (course) => course.course_id.toUpperCase() === normalizedSearch,
+  //   );
+
+  //   if (foundCourse) {
+  //     router.push(`/courses/${foundCourse.course_id}`);
+  //   } else {
+  //     // Optional: alert('Course not found!');
+  //     console.log("Course not found.");
+  //   }
+  // };
 
   return (
     <div className="p-6">
@@ -43,17 +75,16 @@ export default function CoursesPage() {
           Real reviews by UCR students. Find the best classes before you enroll.
         </p>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <input
+           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by Course ID"
             className="w-72 rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+           />
         </div>
       </header>
 
-      
       {isLoading ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (
@@ -66,7 +97,7 @@ export default function CoursesPage() {
       ) : filteredCourses.length === 0 ? (
         <p className="text-center text-gray-600">No matching courses found.</p>
       ) : (
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
           {filteredCourses.map((course) => (
             <Link
               key={course.course_id}
