@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ReviewForm() {
   const [courseCode, setCourseCode] = useState("");
@@ -18,7 +18,6 @@ export default function ReviewForm() {
       difficulty,
     };
 
-    // Submit the review data to the backend
     try {
       const res = await fetch("/api/submitReview", {
         method: "POST",
@@ -29,35 +28,35 @@ export default function ReviewForm() {
       });
 
       if (res.ok) {
-        Toaster.success("Review submitted successfully!");
-        // Reset the form
+        toast.success("Review submitted successfully!");
         setCourseCode("");
         setReviewText("");
         setDifficulty(1);
       } else {
-        Toaster.error("Failed to submit the review. Please try again.");
+        toast.error("Failed to submit the review. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting review:", error);
-      Toaster.error("Error submitting review. Please try again.");
+      toast.error("Error submitting review. Please try again.");
     }
   };
 
   return (
     <div className="p-6">
-      <Link href="/">
-        <button className="mb-8 rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600">
-          Return to Home
-        </button>
-      </Link>
-      <h2 className="mb-4 text-2xl font-semibold">Submit Your Review</h2>
+      <Toaster position="top-center" reverseOrder={false} />
+      <header className="text-center mb-10">
+        <h1 className="text-4xl font-extrabold text-blue-700 mb-2">Submit a Review</h1>
+        <p className="text-lg text-gray-600">
+          Help others choose the best classes by sharing your experience.
+        </p>
+      </header>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="mx-auto max-w-2xl rounded-lg bg-white p-8 shadow-md space-y-6"
+      >
         <div>
-          <label
-            htmlFor="courseCode"
-            className="block font-medium text-gray-700"
-          >
+          <label htmlFor="courseCode" className="block mb-1 font-semibold text-gray-700">
             Course Code
           </label>
           <input
@@ -65,62 +64,60 @@ export default function ReviewForm() {
             id="courseCode"
             value={courseCode}
             onChange={(e) => setCourseCode(e.target.value)}
-            className="w-full rounded border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="e.g., AHS007"
+            placeholder="e.g., CS180"
             required
+            className="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
         <div>
-          <label
-            htmlFor="reviewText"
-            className="block font-medium text-gray-700"
-          >
+          <label htmlFor="reviewText" className="block mb-1 font-semibold text-gray-700">
             Your Review
           </label>
           <textarea
             id="reviewText"
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
-            className="w-full rounded border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Write your review here..."
-            rows={4}
+            rows={5}
             required
+            className="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
         <div>
-          <label
-            htmlFor="difficulty"
-            className="block font-medium text-gray-700"
-          >
-            Difficulty Rating (1-10)
+          <label htmlFor="difficulty" className="block mb-1 font-semibold text-gray-700">
+            Difficulty Rating (1 = Easiest, 10 = Hardest)
           </label>
           <select
+            id="difficulty"
             value={difficulty}
             onChange={(e) => setDifficulty(Number(e.target.value))}
-            id="difficulty"
-            className="w-full rounded border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value={1}>Difficulty: 1 (Easiest)</option>
-            {Array.from({ length: 8 }, (_, i) => (
-              <option key={i + 2} value={i + 2}>
-                Difficulty: {i + 2}
+            {Array.from({ length: 10 }, (_, i) => (
+              <option key={i + 1} value={i + 1}>
+                Difficulty: {i + 1}
               </option>
             ))}
-            <option value={10}>Difficulty: 10 (Hardest)</option>
           </select>
         </div>
 
         <div className="text-center">
           <button
             type="submit"
-            className="rounded bg-blue-500 px-4 py-2 font-semibold text-white transition hover:bg-blue-600"
+            className="rounded-lg bg-blue-600 px-6 py-2.5 font-semibold text-white transition hover:bg-blue-700"
           >
             Submit Review
           </button>
         </div>
       </form>
+
+      <div className="mt-8 text-center">
+        <Link href="/" className="text-blue-600 hover:underline font-medium">
+          ← Back to Home
+        </Link>
+      </div>
     </div>
   );
 }
