@@ -27,9 +27,9 @@ export default async function CoursePage(props) {
   }
 
   return (
-    <div className="mx-auto max-w-3xl p-6">
-      <header className="course-header">
-        <h1 className="title">{course.course_id}</h1>
+    <div className="mx-auto max-w-3xl p-5">
+      <header className="course-header text-center">
+        <h1 className="title mt-4">{course.course_id}</h1>
         <p className="subtitle">
           <strong>Average Difficulty:</strong> {course.avg_difficulty}{" "}
           {getDifficultyEmoji(Number(course.avg_difficulty))}
@@ -40,6 +40,9 @@ export default async function CoursePage(props) {
             {getSentimentEmoji(Number(course.avg_sentiment))}
           </span>
         </p>
+        <a href="/courses" className="subtitle-search">
+          ← Back to Courses
+        </a>
       </header>
 
       <h2 className="mb-4 mt-4 text-2xl font-semibold">Reviews:</h2>

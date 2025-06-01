@@ -44,8 +44,10 @@ export default function ReviewForm() {
   return (
     <div className="p-6">
       <Toaster position="top-center" reverseOrder={false} />
-      <header className="text-center mb-10">
-        <h1 className="text-4xl font-extrabold text-blue-700 mb-2">Submit a Review</h1>
+      <header className="mb-10 text-center">
+        <h1 className="mb-2 text-4xl font-extrabold text-blue-700">
+          Submit a Review
+        </h1>
         <p className="text-lg text-gray-600">
           Help others choose the best classes by sharing your experience.
         </p>
@@ -53,10 +55,13 @@ export default function ReviewForm() {
 
       <form
         onSubmit={handleSubmit}
-        className="mx-auto max-w-2xl rounded-lg bg-white p-8 shadow-md space-y-6"
+        className="mx-auto max-w-2xl space-y-6 rounded-lg bg-white p-8 shadow-md"
       >
         <div>
-          <label htmlFor="courseCode" className="block mb-1 font-semibold text-gray-700">
+          <label
+            htmlFor="courseCode"
+            className="mb-1 block font-semibold text-gray-700"
+          >
             Course Code
           </label>
           <input
@@ -71,7 +76,10 @@ export default function ReviewForm() {
         </div>
 
         <div>
-          <label htmlFor="reviewText" className="block mb-1 font-semibold text-gray-700">
+          <label
+            htmlFor="reviewText"
+            className="mb-1 block font-semibold text-gray-700"
+          >
             Your Review
           </label>
           <textarea
@@ -86,7 +94,10 @@ export default function ReviewForm() {
         </div>
 
         <div>
-          <label htmlFor="difficulty" className="block mb-1 font-semibold text-gray-700">
+          <label
+            htmlFor="difficulty"
+            className="mb-1 block font-semibold text-gray-700"
+          >
             Difficulty Rating (1 = Easiest, 10 = Hardest)
           </label>
           <select
@@ -114,7 +125,7 @@ export default function ReviewForm() {
       </form>
 
       <div className="mt-8 text-center">
-        <Link href="/" className="text-blue-600 hover:underline font-medium">
+        <Link href="/" className="font-medium text-blue-600 hover:underline">
           ← Back to Home
         </Link>
       </div>
