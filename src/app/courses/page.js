@@ -67,27 +67,26 @@ export default function CoursesPage() {
 
   return (
     <div className="p-1">
-      <header className="sticky top-0 bg-white border-b border-gray-200 text-center p-5 mb-1 shadow">
-  <h1 className="mb-4 text-5xl font-extrabold text-blue-700 tracking-tight">
-    UCR Course Reviews
-  </h1>
-  <p className="mb-5 text-lg text-gray-600">
-    Real reviews by UCR students. Find the best classes before you enroll.
-  </p>
+      <header className="sticky top-0 mb-1 border-b border-gray-200 bg-white p-5 text-center shadow">
+        <h1 className="mb-4 text-5xl font-extrabold tracking-tight text-blue-700">
+          UCR Course Reviews
+        </h1>
+        <p className="mb-5 text-lg text-gray-600">
+          Real reviews by UCR students. Find the best classes before you enroll.
+        </p>
 
-  <div className="z-40 bg-white">
-    <div className="flex flex-col items-center justify-center gap-4 sm:flex-row px-4">
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search by Course ID"
-        className="w-72 rounded-lg border border-gray-300 p-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
-  </div>
-</header>
-
+        <div className="z-40 bg-white">
+          <div className="flex flex-col items-center justify-center gap-4 px-4 sm:flex-row">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search by Course ID"
+              className="w-72 rounded-lg border border-gray-300 p-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+      </header>
 
       {isLoading ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
