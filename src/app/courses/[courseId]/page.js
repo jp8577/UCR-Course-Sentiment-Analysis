@@ -32,7 +32,8 @@ export default async function CoursePage(props) {
       <header className="course-header text-center">
         <h1 className="title mt-4">{course.course_id}</h1>
         <p className="subtitle">
-          <strong>Average Difficulty:</strong> {Number(course.avg_difficulty).toFixed(2)}{" "}
+          <strong>Average Difficulty:</strong>{" "}
+          {Number(course.avg_difficulty).toFixed(2)}{" "}
           {getDifficultyEmoji(Number(course.avg_difficulty))}
         </p>
         <p className="subtitle mt-1">
