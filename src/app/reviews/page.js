@@ -1,49 +1,70 @@
 "use client";
-
 import { useState } from "react";
-import Link from "next/link";
-import toast, { Toaster } from "react-hot-toast";
 
 export default function ReviewForm() {
-  const [courseCode, setCourseCode] = useState("");
-  const [reviewText, setReviewText] = useState("");
-  const [difficulty, setDifficulty] = useState(1);
+  const [courseId, setCourseId] = useState("");
+  const [rating, setRating] = useState("");
+  const [text, setText] = useState("");
+  const [status, setStatus] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!courseId || !rating || !text) {
+      setStatus("Please fill all fields.");
+      return;
+    }
+
     const reviewData = {
-      courseCode,
-      reviewText,
-      difficulty,
+      course_id: courseId,
+      rating: parseFloat(rating),
+      text: text,
     };
 
     try {
-      const res = await fetch("/api/submitReview", {
+      const res = await fetch("http://localhost:8000/api/reviews", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reviewData),
       });
 
       if (res.ok) {
-        toast.success("Review submitted successfully!");
-        setCourseCode("");
-        setReviewText("");
-        setDifficulty(1);
+        setStatus("✅ Review submitted successfully!");
+        setCourseId("");
+        setRating("");
+        setText("");
       } else {
-        toast.error("Failed to submit the review. Please try again.");
+        const data = await res.json();
+        setStatus(`❌ Error: ${data.message || "Failed to submit review"}`);
       }
     } catch (error) {
-      console.error("Error submitting review:", error);
-      toast.error("Error submitting review. Please try again.");
+      setStatus(`❌ Error submitting review: ${error}`);
     }
   };
 
+  const boxStyle = {
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    padding: "12px",
+    marginBottom: "16px",
+    backgroundColor: "#f9f9f9",
+  };
+
+  const labelStyle = {
+    display: "block",
+    marginBottom: "8px",
+    fontWeight: "bold",
+  };
+
+  const inputStyle = {
+    width: "100%",
+    padding: "8px",
+    borderRadius: "4px",
+    border: "1px solid #ddd",
+  };
+
   return (
-    <div className="p-6">
-      <Toaster position="top-center" reverseOrder={false} />
+    <div style={{ maxWidth: 500, margin: "auto", padding: "20px" }}>
       <header className="mb-10 text-center">
         <h1 className="mb-2 text-4xl font-extrabold text-blue-700">
           Submit a Review
@@ -53,82 +74,64 @@ export default function ReviewForm() {
         </p>
       </header>
 
-      <form
-        onSubmit={handleSubmit}
-        className="mx-auto max-w-2xl space-y-6 rounded-lg bg-white p-8 shadow-md"
-      >
-        <div>
-          <label
-            htmlFor="courseCode"
-            className="mb-1 block font-semibold text-gray-700"
-          >
-            Course Code
-          </label>
+      <form onSubmit={handleSubmit}>
+        <div style={boxStyle}>
+          <label style={labelStyle}>Course ID:</label>
           <input
             type="text"
-            id="courseCode"
-            value={courseCode}
-            onChange={(e) => setCourseCode(e.target.value)}
-            placeholder="e.g., CS180"
-            required
-            className="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={courseId}
+            onChange={(e) => setCourseId(e.target.value)}
+            style={inputStyle}
           />
         </div>
 
-        <div>
-          <label
-            htmlFor="reviewText"
-            className="mb-1 block font-semibold text-gray-700"
-          >
-            Your Review
-          </label>
+        <div style={boxStyle}>
+          <label style={labelStyle}>Rating (1-10):</label>
+          <input
+            type="number"
+            min="1"
+            max="10"
+            step="1"
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
+            style={inputStyle}
+          />
+        </div>
+
+        <div style={boxStyle}>
+          <label style={labelStyle}>Review:</label>
           <textarea
-            id="reviewText"
-            value={reviewText}
-            onChange={(e) => setReviewText(e.target.value)}
-            placeholder="Write your review here..."
-            rows={5}
-            required
-            className="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            rows="5"
+            style={{ ...inputStyle, resize: "vertical" }}
           />
         </div>
 
-        <div>
-          <label
-            htmlFor="difficulty"
-            className="mb-1 block font-semibold text-gray-700"
-          >
-            Difficulty Rating (1 = Easiest, 10 = Hardest)
-          </label>
-          <select
-            id="difficulty"
-            value={difficulty}
-            onChange={(e) => setDifficulty(Number(e.target.value))}
-            className="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            {Array.from({ length: 10 }, (_, i) => (
-              <option key={i + 1} value={i + 1}>
-                Difficulty: {i + 1}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="text-center">
-          <button
-            type="submit"
-            className="rounded-lg bg-blue-600 px-6 py-2.5 font-semibold text-white transition hover:bg-blue-700"
-          >
-            Submit Review
-          </button>
-        </div>
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            padding: "12px",
+            backgroundColor: "#0070f3",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}
+        >
+          Submit Review
+        </button>
       </form>
 
-      <div className="mt-8 text-center">
-        <Link href="/" className="font-medium text-blue-600 hover:underline">
-          ← Back to Home
-        </Link>
-      </div>
+      {status && (
+        <p
+          style={{ marginTop: "20px", textAlign: "center", fontWeight: "bold" }}
+        >
+          {status}
+        </p>
+      )}
     </div>
   );
 }

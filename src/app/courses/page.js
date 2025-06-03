@@ -112,7 +112,7 @@ export default function CoursesPage() {
                   {course.course_id}
                 </h2>
                 <p className="text-gray-600">
-                  Avg Difficulty: {course.avg_difficulty}{" "}
+                  Avg Difficulty: {Number(course.avg_difficulty).toFixed(2)}{" "}
                   {getDifficultyEmoji(Number(course.avg_difficulty))}
                 </p>
                 {/* Comment Summary Section */}

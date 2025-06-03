@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import HTTPException
 from pydantic import BaseModel
 from typing import List
+from datetime import datetime
 import sys
 import os
 
@@ -34,14 +35,20 @@ print(f"Loaded {len(db.courses)} courses.")
 # Pydantic models
 class Review(BaseModel):
     rating: float
-    comment: str
+    text: str
     date_posted: str
+    sentiment_score: float = 0.0
 
 class Course(BaseModel):
     course_id: str
     avg_difficulty: float
     avg_sentiment: float
     reviews: List[Review]
+
+class ReviewSubmission(BaseModel):
+    course_id: str
+    rating: float
+    text: str
 
 # Helper function to compute avg_sentiment for a course
 def compute_avg_sentiment(course) -> float:
@@ -68,7 +75,7 @@ def get_courses():
         reviews = [
             {
                 'rating': review.rating,
-                'comment': review.text,
+                'text': review.text,
                 'date_posted': review.date_posted
             } for review in course.review_list
         ]
@@ -96,7 +103,7 @@ def get_course(course_id: str):
     reviews = [
         {
             'rating': review.rating,
-            'comment': review.text,
+            'text': review.text,
             'date_posted': review.date_posted
         } for review in course.review_list
     ]
@@ -109,3 +116,19 @@ def get_course(course_id: str):
         'avg_sentiment': avg_sentiment,
         'reviews': reviews
     }
+
+@app.post("/api/reviews")
+def submit_review(review_submission: ReviewSubmission):
+    course_id = review_submission.course_id
+    rating = review_submission.rating
+    text = review_submission.text
+
+    review = Review(rating=rating, text=text, date_posted=datetime.utcnow().strftime('%-m/%-d/%Y'))
+
+    # Add the review to the course (or create course if not exists)
+    db.add_review_to_course(course_id, review)
+
+    # Save changes persistently
+    db.save_courses_to_csv()
+
+    return {"message": "Review submitted successfully"}
