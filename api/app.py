@@ -123,7 +123,11 @@ def submit_review(review_submission: ReviewSubmission):
     rating = review_submission.rating
     text = review_submission.text
 
-    review = Review(rating=rating, text=text, date_posted=datetime.utcnow().strftime('%-m/%-d/%Y'))
+    review = Review(
+    rating=rating,
+    text=text,
+    date_posted=datetime.utcnow().strftime('%m/%d/%Y')  # fixed
+    )
 
     # Add the review to the course (or create course if not exists)
     db.add_review_to_course(course_id, review)

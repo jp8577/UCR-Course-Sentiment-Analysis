@@ -76,8 +76,11 @@ export default function ReviewForm() {
 
       <form onSubmit={handleSubmit}>
         <div style={boxStyle}>
-          <label style={labelStyle}>Course ID:</label>
+          <label htmlFor="courseId" style={labelStyle}>
+            Course ID:
+          </label>
           <input
+            id="courseId"
             type="text"
             value={courseId}
             onChange={(e) => setCourseId(e.target.value)}
@@ -86,8 +89,11 @@ export default function ReviewForm() {
         </div>
 
         <div style={boxStyle}>
-          <label style={labelStyle}>Rating (1-10):</label>
+          <label htmlFor="rating" style={labelStyle}>
+            Difficulty Rating (1-10):
+          </label>
           <input
+            id="rating"
             type="number"
             min="1"
             max="10"
@@ -99,8 +105,11 @@ export default function ReviewForm() {
         </div>
 
         <div style={boxStyle}>
-          <label style={labelStyle}>Review:</label>
+          <label htmlFor="reviewText" style={labelStyle}>
+            Review:
+          </label>
           <textarea
+            id="reviewText"
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows="5"
@@ -127,7 +136,11 @@ export default function ReviewForm() {
 
       {status && (
         <p
-          style={{ marginTop: "20px", textAlign: "center", fontWeight: "bold" }}
+          style={{
+            marginTop: "20px",
+            textAlign: "center",
+            fontWeight: "bold",
+          }}
         >
           {status}
         </p>
