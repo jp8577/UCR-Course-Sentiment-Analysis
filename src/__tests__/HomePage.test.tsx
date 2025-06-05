@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import HomePage from "../app/page"; // adjust path
+import type { FC, ReactNode } from "react";
 
 // Mock next/link
 jest.mock("next/link", () => {
-  return ({ href, children }: any) => <a href={href}>{children}</a>;
+  return ({ href, children }: { href: string; children: ReactNode }) => <a href={href}>{children}</a>;
 });
 
 // Mock TopReviewed component
