@@ -86,7 +86,7 @@ export default function ReviewForm() {
         </div>
 
         <div style={boxStyle}>
-          <label style={labelStyle}>Rating (1-10):</label>
+          <label style={labelStyle}>Difficulty Rating (1-10):</label>
           <input
             type="number"
             min="1"
